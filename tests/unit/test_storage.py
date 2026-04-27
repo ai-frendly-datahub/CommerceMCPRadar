@@ -45,6 +45,10 @@ class _RadarStorage(Protocol):
         self, category: str, *, days: int = 7, limit: int = 200
     ) -> list[_Article]: ...
 
+    def recent_articles_by_collected_at(
+        self, category: str, *, days: int = 7, limit: int = 500
+    ) -> list[_Article]: ...
+
     def delete_older_than(self, days: int) -> int: ...
 
     def close(self) -> None: ...
@@ -266,6 +270,26 @@ def test_recent_articles_filters_by_category(tmp_storage: object) -> None:
     assert len(policy_results) == 1
     assert tech_results[0].category == "tech"
     assert policy_results[0].category == "policy"
+
+
+def test_recent_articles_by_collected_at_includes_old_published_article(
+    tmp_storage: object,
+) -> None:
+    storage = cast(_RadarStorage, tmp_storage)
+    article = _make_article(
+        title="Old published, newly collected",
+        link="https://example.com/newly-collected",
+        summary="collected_at should drive quality window",
+        published=datetime.now(UTC) - timedelta(days=45),
+    )
+
+    storage.upsert_articles([article])
+    published_window_results = storage.recent_articles(category="tech", days=7)
+    collected_window_results = storage.recent_articles_by_collected_at(category="tech", days=7)
+
+    assert published_window_results == []
+    assert len(collected_window_results) == 1
+    assert collected_window_results[0].link == article.link
 
 
 def test_delete_older_than_preserves_recent_articles(tmp_storage: object) -> None:

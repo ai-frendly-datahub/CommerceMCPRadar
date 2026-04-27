@@ -1,6 +1,5 @@
-category_name: "commerce_mcp"
-display_name: "커머스 MCP 레이더"
-
+category_name: commerce_mcp
+display_name: 커머스 MCP 레이더
 data_quality:
   priority: P2
   primary_motion: conversion
@@ -9,150 +8,255 @@ data_quality:
     freshness_report: reports/commerce_mcp_quality.json
     dated_freshness_report_pattern: reports/commerce_mcp_YYYYMMDD_quality.json
     tracked_event_models:
-      - mcp_directory_entry
-      - linked_repository_metadata
-      - risk_scope_signal
+    - mcp_directory_entry
+    - linked_repository_metadata
+    - risk_scope_signal
   event_models:
     mcp_directory_entry:
       date_fields:
-        - collected_at
+      - collected_at
       required_fields:
-        - repository
-        - source_section
-        - source_url
+      - repository
+      - source_section
+      - source_url
     linked_repository_metadata:
       date_fields:
-        - pushed_at
-        - collected_at
+      - pushed_at
+      - collected_at
       required_fields:
-        - repository
-        - archived
-        - license
+      - repository
+      - archived
+      - license
     risk_scope_signal:
       date_fields:
-        - collected_at
+      - collected_at
       required_fields:
-        - repository
-        - risk_scope
-        - evidence_url
+      - repository
+      - risk_scope
+      - evidence_url
   canonical_keys:
     mcp_project:
-      - repository
-      - provider
-      - mcp_domain
+    - repository
+    - provider
+    - mcp_domain
   freshness_sla:
     directory_days: 7
     repository_metadata_days: 7
   quality_gates:
-    - awesome list는 community seed source로만 사용하고 보안성을 보증하지 않는다
-    - linked repository metadata로 archived/license/docs 여부를 교차 검증한다
-    - 주문, 메시지, 일정 등록, 위치, 문서 처리 도구는 high-risk signal로 분리한다
+  - awesome list는 community seed source로만 사용하고 보안성을 보증하지 않는다
+  - linked repository metadata로 archived/license/docs 여부를 교차 검증한다
+  - 주문, 메시지, 일정 등록, 위치, 문서 처리 도구는 high-risk signal로 분리한다
 source_backlog:
   operational_candidates:
-    - id: github_repository_metadata
-      name: GitHub repository metadata enrichment
-      signal_type: linked_repository_metadata
-      activation_gate: rate-limit handling, repository canonicalization, and archived/license mapping
-    - id: mcp_registry_crosscheck
-      name: MCP registry cross-check
-      signal_type: mcp_registry_presence
-      activation_gate: registry API availability and canonical package mapping
-    - id: security_advisory_crosscheck
-      name: GitHub security advisory cross-check
-      signal_type: security_risk
-      activation_gate: advisory API coverage and false positive handling
-
+  - id: github_repository_metadata
+    name: GitHub repository metadata enrichment
+    signal_type: linked_repository_metadata
+    activation_gate: rate-limit handling, repository canonicalization, and archived/license
+      mapping
+  - id: mcp_registry_crosscheck
+    name: MCP registry cross-check
+    signal_type: mcp_registry_presence
+    activation_gate: registry API availability and canonical package mapping
+  - id: security_advisory_crosscheck
+    name: GitHub security advisory cross-check
+    signal_type: security_risk
+    activation_gate: advisory API coverage and false positive handling
 sources:
-  - name: "awesome-mcp-korea Commerce & Retail"
-    type: "github_readme_section"
-    url: "https://raw.githubusercontent.com/darjeeling/awesome-mcp-korea/main/README.md"
-    section: "Commerce & Retail"
-    trust_tier: "T4_community"
-    collection_tier: "C1_static_list"
-    content_type: "mcp_directory"
-
+- name: awesome-mcp-korea Commerce & Retail
+  type: github_readme_section
+  url: https://raw.githubusercontent.com/darjeeling/awesome-mcp-korea/main/README.md
+  section: Commerce & Retail
+  trust_tier: T4_community
+  collection_tier: C1_static_list
+  content_type: mcp_directory
+  config:
+    event_model: mcp_directory_entry
+- id: mcp_candidate_hmmhmmhm_daiso_mcp
+  name: hmmhmmhm/daiso-mcp
+  type: mcp_server
+  enabled: false
+  url: https://github.com/hmmhmmhm/daiso-mcp
+  transport: stdio
+  trust_tier: T4_community
+  collection_tier: C4_mcp_tool
+  content_type: mcp_tool_result
+  risk_scope:
+  - external_api_key
+  - network_read
+  - tool_allowlist_unresolved
+  - user_account_scope
+  - write_or_mutation_possible
+  notes: Activation audit applied; source remains disabled until transport smoke tests
+    and required secrets are validated.
+  config:
+    repository: hmmhmmhm/daiso-mcp
+    source_seed: awesome-mcp-korea
+    source_section: Commerce & Retail
+    activation_status: blocked_tool_allowlist_unresolved
+    activation_audited_at: '2026-04-14T01:55:57.420863+00:00'
+    metadata_checked_at: '2026-04-14T01:30:44.113793+00:00'
+    github_archived: false
+    github_disabled: false
+    github_license: MIT
+    github_pushed_at: '2026-04-13T15:51:45Z'
+    github_default_branch: main
+    github_stars: 284
+    command: npx
+    args:
+    - -y
+    - daiso
+    env:
+    - GOOGLE_MAPS_API_KEY
+    - INVALID_ACTION_QUERY
+    - ZYTE_API_KEY
+    tools: []
+    resources: []
+    timeout_seconds: 20
+    max_items: 50
+    activation_gates:
+    - risk_scope_review_required
+    - env_secret_documentation_required
+    - tool_resource_allowlist_required
+    - registry_crosscheck_required
+    - fake_transport_smoke_test_required
+    event_model: mcp_directory_entry
+- id: mcp_candidate_edward_kim_dev_kr_pc_deals_mcp
+  name: edward-kim-dev/kr-pc-deals-mcp
+  type: mcp_server
+  enabled: false
+  url: https://github.com/edward-kim-dev/kr-pc-deals-mcp
+  transport: stdio
+  trust_tier: T4_community
+  collection_tier: C4_mcp_tool
+  content_type: mcp_tool_result
+  risk_scope:
+  - external_api_key
+  - network_read
+  - user_account_scope
+  notes: Activation audit applied; source remains disabled until transport smoke tests
+    and required secrets are validated.
+  config:
+    repository: edward-kim-dev/kr-pc-deals-mcp
+    source_seed: awesome-mcp-korea
+    source_section: Commerce & Retail
+    activation_status: blocked_env_required
+    activation_audited_at: '2026-04-14T01:55:57.420863+00:00'
+    metadata_checked_at: '2026-04-14T01:30:44.113793+00:00'
+    github_archived: false
+    github_disabled: false
+    github_license: MIT
+    github_pushed_at: '2026-03-31T01:14:59Z'
+    github_default_branch: main
+    github_stars: 4
+    command: npx
+    args:
+    - -y
+    - kr-pc-deals-mcp
+    env:
+    - ZYTE_API_KEY
+    tools:
+    - build_add
+    - build_check_compatibility
+    - build_remove
+    - build_status
+    - compare_prices
+    - find_lowest_price
+    - get_price_history
+    - get_product_detail
+    - list_by_category
+    - proxy_status
+    - search_parts
+    resources: []
+    timeout_seconds: 20
+    max_items: 50
+    activation_gates:
+    - risk_scope_review_required
+    - env_secret_documentation_required
+    - registry_crosscheck_required
+    - fake_transport_smoke_test_required
+    event_model: mcp_directory_entry
 entities:
-  - name: "MCPDomain"
-    display_name: "MCP 도메인"
-    keywords:
-      - "Commerce & Retail"
-      - "commerce"
-      - "retail"
-      - "e-commerce"
-      - "shopping"
-      - "price"
-      - "stock"
-      - "커머스"
-      - "쇼핑"
-      - "재고"
-      - "가격"
-      - "오픈마켓"
-  - name: "Provider"
-    display_name: "서비스 제공자"
-    keywords:
-      - "naver"
-      - "kakao"
-      - "kis"
-      - "krx"
-      - "dart"
-      - "kosis"
-      - "kma"
-      - "data.go.kr"
-      - "dooray"
-      - "naver works"
-      - "tourapi"
-      - "한국투자증권"
-      - "네이버"
-      - "카카오"
-      - "기상청"
-      - "공공데이터"
-  - name: "Capability"
-    display_name: "도구 기능"
-    keywords:
-      - "search"
-      - "lookup"
-      - "analysis"
-      - "analyze"
-      - "route"
-      - "order"
-      - "message"
-      - "calendar"
-      - "parse"
-      - "검색"
-      - "조회"
-      - "분석"
-      - "주문"
-      - "메신저"
-      - "일정"
-      - "파싱"
-      - "길찾기"
-  - name: "RiskScope"
-    display_name: "리스크 범위"
-    keywords:
-      - "api"
-      - "rest api"
-      - "api key"
-      - "credential"
-      - "order"
-      - "message"
-      - "calendar"
-      - "location"
-      - "document"
-      - "주문"
-      - "메신저 보내기"
-      - "일정 등록"
-      - "위치"
-      - "문서"
-      - "개인정보"
-  - name: "ProjectHealth"
-    display_name: "프로젝트 상태"
-    keywords:
-      - "mcp"
-      - "server"
-      - "github"
-      - "openapi"
-      - "api"
-      - "documentation"
-      - "서버"
-      - "도구"
-      - "문서"
+- name: MCPDomain
+  display_name: MCP 도메인
+  keywords:
+  - Commerce & Retail
+  - commerce
+  - retail
+  - e-commerce
+  - shopping
+  - price
+  - stock
+  - 커머스
+  - 쇼핑
+  - 재고
+  - 가격
+  - 오픈마켓
+- name: Provider
+  display_name: 서비스 제공자
+  keywords:
+  - naver
+  - kakao
+  - kis
+  - krx
+  - dart
+  - kosis
+  - kma
+  - data.go.kr
+  - dooray
+  - naver works
+  - tourapi
+  - 한국투자증권
+  - 네이버
+  - 카카오
+  - 기상청
+  - 공공데이터
+- name: Capability
+  display_name: 도구 기능
+  keywords:
+  - search
+  - lookup
+  - analysis
+  - analyze
+  - route
+  - order
+  - message
+  - calendar
+  - parse
+  - 검색
+  - 조회
+  - 분석
+  - 주문
+  - 메신저
+  - 일정
+  - 파싱
+  - 길찾기
+- name: RiskScope
+  display_name: 리스크 범위
+  keywords:
+  - api
+  - rest api
+  - api key
+  - credential
+  - order
+  - message
+  - calendar
+  - location
+  - document
+  - 주문
+  - 메신저 보내기
+  - 일정 등록
+  - 위치
+  - 문서
+  - 개인정보
+- name: ProjectHealth
+  display_name: 프로젝트 상태
+  keywords:
+  - mcp
+  - server
+  - github
+  - openapi
+  - api
+  - documentation
+  - 서버
+  - 도구
+  - 문서

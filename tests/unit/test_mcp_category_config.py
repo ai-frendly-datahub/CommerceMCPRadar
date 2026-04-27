@@ -4,7 +4,7 @@ from pathlib import Path
 
 from radar.analyzer import apply_entity_rules
 from radar.collector import parse_markdown_section_items
-from radar.config_loader import load_category_config
+from radar.config_loader import load_category_config, load_category_quality_config
 from radar.models import Article
 
 
@@ -14,14 +14,22 @@ def _category_name() -> str:
     return configs[0].stem
 
 
+def _seed_source(category):
+    seeds = [source for source in category.sources if source.type == "github_readme_section"]
+    assert len(seeds) == 1
+    return seeds[0]
+
+
 def test_mcp_category_config_uses_readme_section_source() -> None:
     category = load_category_config(_category_name())
 
-    assert len(category.sources) == 1
-    source = category.sources[0]
+    source = _seed_source(category)
     assert source.type == "github_readme_section"
     assert source.url == "https://raw.githubusercontent.com/darjeeling/awesome-mcp-korea/main/README.md"
     assert source.section
+    assert source.trust_tier == "T4_community"
+    assert source.collection_tier == "C1_static_list"
+    assert source.content_type == "mcp_directory"
     assert {entity.name for entity in category.entities} >= {
         "MCPDomain",
         "Provider",
@@ -33,7 +41,8 @@ def test_mcp_category_config_uses_readme_section_source() -> None:
 
 def test_mcp_category_config_matches_section_entries() -> None:
     category = load_category_config(_category_name())
-    section = category.sources[0].section
+    seed_source = _seed_source(category)
+    section = seed_source.section
     markdown = f"""
 ### {section}
 
@@ -51,7 +60,7 @@ def test_mcp_category_config_matches_section_entries() -> None:
         title=items[0]["title"],
         link=items[0]["link"],
         summary=items[0]["summary"],
-        source=category.sources[0].name,
+        source=seed_source.name,
         category=category.category_name,
     )
     analyzed = apply_entity_rules([article], category.entities)
@@ -59,3 +68,43 @@ def test_mcp_category_config_matches_section_entries() -> None:
     assert analyzed[0].matched_entities
     assert "MCPDomain" in analyzed[0].matched_entities
     assert "ProjectHealth" in analyzed[0].matched_entities
+
+
+def test_mcp_server_sources_are_disabled_metadata_candidates() -> None:
+    category = load_category_config(_category_name())
+    candidates = [source for source in category.sources if source.type == "mcp_server"]
+    if category.category_name != "misc_mcp":
+        assert candidates
+
+    allowed_statuses = {
+        "metadata_only",
+        "blocked_command_unresolved",
+        "blocked_env_required",
+        "blocked_tool_allowlist_unresolved",
+        "candidate_ready_for_fake_transport_test",
+        "fake_transport_smoke_test_passed",
+    }
+    for source in candidates:
+        assert source.enabled is False
+        assert source.collection_tier == "C4_mcp_tool"
+        assert source.content_type == "mcp_tool_result"
+        assert source.config["activation_status"] in allowed_statuses
+        assert source.config["repository"]
+        assert isinstance(source.config.get("tools", []), list)
+        assert isinstance(source.config.get("resources", []), list)
+        if source.config["activation_status"] != "metadata_only":
+            assert source.config["activation_audited_at"]
+            assert source.config["activation_gates"]
+
+
+def test_mcp_category_quality_config_tracks_mcp_event_models() -> None:
+    quality_config = load_category_quality_config(_category_name())
+    data_quality = quality_config["data_quality"]
+    assert isinstance(data_quality, dict)
+    outputs = data_quality["quality_outputs"]
+    assert isinstance(outputs, dict)
+    assert outputs["tracked_event_models"] == [
+        "mcp_directory_entry",
+        "linked_repository_metadata",
+        "risk_scope_signal",
+    ]
