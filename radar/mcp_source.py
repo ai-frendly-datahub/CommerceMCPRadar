@@ -3,11 +3,13 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import signal
 import shutil
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
+from urllib.parse import quote
 
 import requests
 
@@ -25,6 +27,17 @@ MCP_SOURCE_TYPES = {
     "mcp_tool",
     "model_context_protocol",
 }
+COLLECTION_ITEM_KEYS = (
+    "articles",
+    "items",
+    "results",
+    "products",
+    "stores",
+    "movies",
+    "theaters",
+    "events",
+    "data",
+)
 
 
 @dataclass(frozen=True)
@@ -41,6 +54,7 @@ class MCPSourceConfig:
     url: str = ""
     headers: dict[str, str] = field(default_factory=dict)
     env: dict[str, str] = field(default_factory=dict)
+    required_env: tuple[str, ...] = ()
     tools: tuple[MCPToolCall, ...] = ()
     resources: tuple[str, ...] = ()
     timeout_seconds: int = 15
@@ -87,6 +101,7 @@ def parse_mcp_source_config(source: Source, *, timeout: int, limit: int) -> MCPS
         url=url,
         headers={**source.headers, **_string_dict(raw.get("headers"))},
         env=_resolve_env(raw.get("env")),
+        required_env=tuple(_required_env_names(raw.get("env"))),
         tools=tools,
         resources=resources,
         timeout_seconds=max(1, timeout_seconds),
@@ -97,6 +112,8 @@ def parse_mcp_source_config(source: Source, *, timeout: int, limit: int) -> MCPS
 def collect_mcp_payloads(source: Source, config: MCPSourceConfig) -> list[Any]:
     if not config.tools and not config.resources:
         raise SourceError(source.name, "mcp_server source requires allowed tools or resources")
+
+    _validate_required_env(source, config)
 
     if config.transport == "stdio":
         return _collect_stdio_payloads(source, config)
@@ -115,10 +132,14 @@ def normalize_mcp_payloads(
     limit: int,
 ) -> list[Article]:
     articles: list[Article] = []
+    seen_links: set[str] = set()
     for payload in payloads:
         for item in _iter_payload_items(payload):
             article = _payload_item_to_article(item, source=source, category=category)
             if article is not None:
+                if article.link in seen_links:
+                    continue
+                seen_links.add(article.link)
                 articles.append(article)
                 if len(articles) >= limit:
                     return articles
@@ -145,6 +166,7 @@ async def _run_stdio_session(source: Source, config: MCPSourceConfig) -> list[An
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
             env=env,
+            **_stdio_process_options(),
         )
     except OSError as exc:
         raise SourceError(source.name, f"Failed to start MCP server command: {exc}") from exc
@@ -197,11 +219,7 @@ async def _run_stdio_session(source: Source, config: MCPSourceConfig) -> list[An
             )
             payloads.append(await _stdio_read_result(process, request_id, timeout=config.timeout_seconds))
     finally:
-        process.terminate()
-        try:
-            await asyncio.wait_for(process.wait(), timeout=2)
-        except TimeoutError:
-            process.kill()
+        await _stop_stdio_process(process)
     return payloads
 
 
@@ -209,6 +227,83 @@ def _resolve_command(command: str) -> str:
     """Resolve commands through PATHEXT on Windows and PATH elsewhere."""
     resolved = shutil.which(command)
     return resolved or command
+
+
+async def _stop_stdio_process(process: asyncio.subprocess.Process) -> None:
+    """Close stdio cleanly so timed-out MCP servers do not leak noisy transports."""
+    stdin = process.stdin
+    if stdin is not None and not stdin.is_closing():
+        stdin.close()
+
+    if process.returncode is None:
+        _send_stdio_signal(process, signal.SIGTERM)
+        try:
+            await asyncio.wait_for(process.wait(), timeout=2)
+        except TimeoutError:
+            _send_stdio_signal(process, signal.SIGKILL)
+            try:
+                await asyncio.wait_for(process.wait(), timeout=2)
+            except TimeoutError:
+                pass
+
+    await _stop_stdio_process_group(process)
+    await _wait_for_stdin_close(stdin)
+    await _close_process_transport(process)
+
+
+def _stdio_process_options() -> dict[str, Any]:
+    if os.name == "nt":
+        return {}
+    return {"start_new_session": True}
+
+
+def _send_stdio_signal(process: asyncio.subprocess.Process, sig: signal.Signals) -> None:
+    try:
+        if os.name == "nt":
+            if sig == signal.SIGTERM:
+                process.terminate()
+            else:
+                process.kill()
+            return
+        os.killpg(process.pid, sig)
+    except ProcessLookupError:
+        pass
+
+
+async def _stop_stdio_process_group(process: asyncio.subprocess.Process) -> None:
+    if os.name == "nt" or not _process_group_exists(process.pid):
+        return
+    _send_stdio_signal(process, signal.SIGTERM)
+    await asyncio.sleep(0.2)
+    if _process_group_exists(process.pid):
+        _send_stdio_signal(process, signal.SIGKILL)
+        await asyncio.sleep(0)
+
+
+def _process_group_exists(pid: int) -> bool:
+    try:
+        os.killpg(pid, 0)
+    except ProcessLookupError:
+        return False
+    return True
+
+
+async def _wait_for_stdin_close(stdin: asyncio.StreamWriter | None) -> None:
+    if stdin is None:
+        return
+    try:
+        await asyncio.wait_for(stdin.wait_closed(), timeout=0.5)
+    except (BrokenPipeError, ConnectionResetError, TimeoutError):
+        pass
+
+
+async def _close_process_transport(process: asyncio.subprocess.Process) -> None:
+    transport = getattr(process, "_transport", None)
+    if transport is not None:
+        # asyncio.subprocess.Process has no public close method; closing the
+        # transport avoids deferred __del__ cleanup after asyncio.run() exits.
+        transport.close()
+        await asyncio.sleep(0)
 
 
 async def _stdio_send(process: asyncio.subprocess.Process, payload: dict[str, Any]) -> None:
@@ -227,7 +322,10 @@ async def _stdio_read_result(
     if process.stdout is None:
         raise RuntimeError("MCP stdio process has no stdout")
     while True:
-        raw = await asyncio.wait_for(process.stdout.readline(), timeout=timeout)
+        try:
+            raw = await asyncio.wait_for(process.stdout.readline(), timeout=timeout)
+        except TimeoutError as exc:
+            raise TimeoutError(f"response {request_id} after {timeout}s") from exc
         if not raw:
             stderr = ""
             if process.stderr is not None:
@@ -340,20 +438,40 @@ def _post_jsonrpc(
 def _response_json(response: requests.Response) -> dict[str, Any]:
     content_type = response.headers.get("Content-Type", "")
     if "text/event-stream" in content_type:
-        for line in response.text.splitlines():
-            if line.startswith("data:"):
-                return json.loads(line.removeprefix("data:").strip())
+        if not response.encoding or response.encoding.lower() == "iso-8859-1":
+            response.encoding = "utf-8"
+        for event_data in _event_stream_data_blocks(response.text):
+            return json.loads(event_data)
+        raise ValueError("MCP event-stream response did not contain data")
     data = response.json()
     if not isinstance(data, dict):
         raise ValueError("MCP JSON-RPC response must be an object")
     return data
 
 
+def _event_stream_data_blocks(text: str) -> list[str]:
+    blocks: list[str] = []
+    current: list[str] = []
+    for line in text.splitlines():
+        if line.startswith("data:"):
+            current.append(line.removeprefix("data:").strip())
+            continue
+        if not line.strip() and current:
+            blocks.append("\n".join(current))
+            current = []
+    if current:
+        blocks.append("\n".join(current))
+    return blocks
+
+
 def _jsonrpc_result(message: Mapping[str, Any]) -> Any:
     error = message.get("error")
     if error:
         raise RuntimeError(f"MCP JSON-RPC error: {error}")
-    return message.get("result")
+    result = message.get("result")
+    if isinstance(result, Mapping) and result.get("isError") is True:
+        raise RuntimeError(f"MCP tool result error: {json.dumps(result, ensure_ascii=False)}")
+    return result
 
 
 def _iter_payload_items(payload: Any) -> list[Any]:
@@ -374,8 +492,19 @@ def _iter_payload_items(payload: Any) -> list[Any]:
             return _iter_content_blocks(payload["content"])
         if "contents" in payload:
             return _iter_content_blocks(payload["contents"])
+        collection_items = _iter_collection_items(payload)
+        if collection_items:
+            return collection_items
         return [payload]
     return [payload]
+
+
+def _iter_collection_items(payload: Mapping[str, Any]) -> list[Any]:
+    for key in COLLECTION_ITEM_KEYS:
+        value = payload.get(key)
+        if isinstance(value, list) and value:
+            return _iter_payload_items(value)
+    return []
 
 
 def _iter_content_blocks(blocks: Any) -> list[Any]:
@@ -402,7 +531,7 @@ def _payload_item_to_article(item: Any, *, source: Source, category: str) -> Art
             return None
         return Article(
             title=_first_line(text, default=source.name),
-            link=_fallback_link(source),
+            link=_stable_item_link(source, _first_line(text, default=source.name)),
             summary=text,
             published=now,
             source=source.name,
@@ -419,10 +548,38 @@ def _payload_item_to_article(item: Any, *, source: Source, category: str) -> Art
             category=category,
         )
 
-    title = _first_nonempty(item, "title", "name", "repository", "id") or source.name
+    title = (
+        _first_nonempty(
+            item,
+            "title",
+            "name",
+            "productName",
+            "product_name",
+            "storeName",
+            "store_name",
+            "repository",
+            "id",
+            "productId",
+        )
+        or source.name
+    )
     link = (
         _first_nonempty(item, "url", "link", "uri", "repository_url", "homepage")
         or _repository_link(_first_nonempty(item, "repository"))
+        or _stable_item_link(
+            source,
+            _first_nonempty(
+                item,
+                "id",
+                "productId",
+                "storeCode",
+                "store_code",
+                "code",
+                "name",
+                "productName",
+                "product_name",
+            ),
+        )
         or _fallback_link(source)
     )
     summary = _first_nonempty(item, "summary", "description", "text", "content")
@@ -451,6 +608,27 @@ def _parse_tools(raw: dict[str, Any]) -> list[MCPToolCall]:
             if name and isinstance(arguments, dict):
                 tools.append(MCPToolCall(name=name, arguments=dict(arguments)))
     return tools
+
+
+def _validate_required_env(source: Source, config: MCPSourceConfig) -> None:
+    missing = [
+        name
+        for name in config.required_env
+        if not str(config.env.get(name, "")).strip()
+    ]
+    if missing:
+        raise SourceError(
+            source.name,
+            f"Missing required MCP env var(s): {', '.join(missing)}",
+        )
+
+
+def _required_env_names(value: Any) -> list[str]:
+    if isinstance(value, list):
+        return [str(name).strip() for name in value if str(name).strip()]
+    if isinstance(value, dict):
+        return [str(name).strip() for name in value if str(name).strip()]
+    return []
 
 
 def _resolve_env(value: Any) -> dict[str, str]:
@@ -541,6 +719,12 @@ def _repository_link(value: str) -> str:
     if value and "/" in value and not value.startswith(("http://", "https://")):
         return f"https://github.com/{value.strip()}"
     return ""
+
+
+def _stable_item_link(source: Source, value: str) -> str:
+    if not value:
+        return ""
+    return f"{_fallback_link(source).rstrip('#')}#{quote(value, safe='')}"
 
 
 def _fallback_link(source: Source) -> str:

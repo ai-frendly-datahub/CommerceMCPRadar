@@ -1,6 +1,6 @@
 {
   "category": "commerce_mcp",
-  "generated_at": "2026-04-28T00:40:33.355839+00:00",
+  "generated_at": "2026-04-28T15:12:34.929725+00:00",
   "scope_note": "commerce_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
@@ -58,16 +58,18 @@
       "status": "fresh",
       "article_count": 2,
       "event_count": 2,
-      "latest_event_at": "2026-04-24T07:38:09.827815+00:00",
-      "age_days": 3.71,
-      "latest_title": "edward-kim-dev/kr-pc-deals-mcp",
-      "latest_url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "latest_event_at": "2026-04-28T15:12:33.804206+00:00",
+      "age_days": 0.0,
+      "latest_title": "daiso-mcp",
+      "latest_url": "https://github.com/hmmhmmhm/daiso-mcp",
       "latest_mcp_domain": [
+        "재고",
         "가격"
       ],
       "latest_provider": [],
       "latest_capability": [
-        "검색"
+        "검색",
+        "조회"
       ],
       "latest_risk_scope": [],
       "latest_required_field_proxy": {
@@ -157,15 +159,17 @@
     {
       "source": "awesome-mcp-korea Commerce & Retail",
       "event_model": "mcp_directory_entry",
-      "title": "edward-kim-dev/kr-pc-deals-mcp",
-      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
-      "event_at": "2026-04-24T07:38:09.827815+00:00",
+      "title": "daiso-mcp",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp",
+      "event_at": "2026-04-28T15:12:33.804206+00:00",
       "mcp_domain": [
+        "재고",
         "가격"
       ],
       "provider": [],
       "capability": [
-        "검색"
+        "검색",
+        "조회"
       ],
       "risk_scope": [],
       "project_health": [
@@ -181,17 +185,15 @@
     {
       "source": "awesome-mcp-korea Commerce & Retail",
       "event_model": "mcp_directory_entry",
-      "title": "daiso-mcp",
-      "url": "https://github.com/hmmhmmhm/daiso-mcp",
-      "event_at": "2026-04-24T07:38:09.827785+00:00",
+      "title": "edward-kim-dev/kr-pc-deals-mcp",
+      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "event_at": "2026-04-24T07:38:09.827815+00:00",
       "mcp_domain": [
-        "재고",
         "가격"
       ],
       "provider": [],
       "capability": [
-        "검색",
-        "조회"
+        "검색"
       ],
       "risk_scope": [],
       "project_health": [

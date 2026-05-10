@@ -1,35 +1,73 @@
 {
   "category": "commerce_mcp",
-  "generated_at": "2026-04-28T00:40:33.355839+00:00",
+  "generated_at": "2026-05-07T09:31:04.145952+00:00",
   "scope_note": "commerce_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
-    "enabled_sources": 1,
+    "enabled_sources": 2,
     "tracked_sources": 3,
-    "fresh_sources": 1,
+    "fresh_sources": 2,
     "stale_sources": 0,
     "missing_sources": 0,
     "missing_event_sources": 0,
     "unknown_event_date_sources": 0,
     "not_tracked_sources": 0,
-    "skipped_disabled_sources": 2,
+    "skipped_disabled_sources": 1,
     "collection_error_count": 0,
-    "mcp_signal_event_count": 2,
-    "directory_seed_source_count": 3,
+    "mcp_signal_event_count": 19,
+    "directory_seed_source_count": 1,
     "mcp_server_candidate_count": 2,
-    "enabled_mcp_server_source_count": 0,
-    "blocked_mcp_server_source_count": 2,
-    "real_transport_smoke_tested_source_count": 0,
-    "tool_allowlist_present_source_count": 1,
-    "credential_required_source_count": 2,
+    "enabled_mcp_server_source_count": 1,
+    "blocked_mcp_server_source_count": 1,
+    "real_transport_smoke_tested_source_count": 1,
+    "tool_allowlist_present_source_count": 2,
+    "credential_required_source_count": 1,
+    "env_preflight_required_source_count": 1,
+    "env_preflight_ready_source_count": 0,
+    "env_preflight_missing_source_count": 1,
+    "env_preflight_missing_var_count": 1,
+    "env_preflight_not_required_source_count": 1,
     "repository_metadata_complete_source_count": 2,
     "repository_metadata_gap_count": 0,
-    "security_activation_gate_count": 9,
+    "repository_metadata_fresh_source_count": 2,
+    "repository_metadata_stale_source_count": 0,
+    "repository_metadata_incomplete_source_count": 0,
+    "repository_metadata_missing_checked_at_source_count": 0,
+    "repository_metadata_review_required_count": 0,
+    "repository_docs_present_source_count": 2,
+    "repository_docs_missing_source_count": 0,
+    "repository_security_policy_present_source_count": 1,
+    "repository_security_advisory_checked_source_count": 2,
+    "repository_security_advisory_total_count": 0,
+    "repository_security_advisory_open_source_count": 0,
+    "repository_security_enrichment_review_required_count": 0,
+    "security_activation_gate_count": 1,
+    "activation_gate_source_count": 1,
+    "activation_gate_total_count": 1,
+    "activation_risk_scope_review_required_source_count": 0,
+    "activation_command_unresolved_source_count": 0,
+    "activation_command_discovery_checked_source_count": 0,
+    "activation_command_discovery_resolved_source_count": 0,
+    "activation_command_discovery_unresolved_source_count": 0,
+    "activation_command_discovery_multi_server_ambiguous_source_count": 0,
+    "activation_command_discovery_status_counts": {},
+    "activation_env_secret_required_source_count": 0,
+    "activation_tool_allowlist_required_source_count": 0,
+    "activation_registry_crosscheck_required_source_count": 0,
+    "activation_fake_transport_required_source_count": 0,
+    "activation_real_transport_required_source_count": 1,
+    "activation_runtime_review_required_source_count": 0,
+    "activation_ready_for_fake_transport_source_count": 0,
+    "controlled_rollout_source_count": 1,
+    "controlled_rollout_passed_count": 1,
+    "controlled_rollout_warning_count": 0,
+    "controlled_rollout_failure_count": 0,
+    "enabled_mcp_without_controlled_rollout_guard_count": 0,
     "daily_review_item_count": 2,
     "mcp_directory_entry_events": 2,
-    "mcp_tool_result_events": 0,
-    "linked_repository_metadata_events": 0,
-    "risk_scope_signal_events": 0
+    "mcp_tool_result_events": 10,
+    "linked_repository_metadata_events": 2,
+    "risk_scope_signal_events": 5
   },
   "sources": [
     {
@@ -46,28 +84,45 @@
       "repository": "",
       "activation_status": "",
       "activation_gates": [],
+      "activation_gate_count": 0,
+      "activation_next_gate": "",
+      "activation_command_discovery_status": "",
+      "activation_command_discovery_checked_at": "",
       "tools_count": 0,
       "env_count": 0,
+      "env_preflight_status": "not_required",
+      "env_required_names": [],
+      "env_missing_names": [],
       "repository_metadata_gaps": [
         "repository",
         "github_archived",
         "github_license",
         "github_pushed_at"
       ],
+      "repository_metadata": {},
       "freshness_sla_days": 7.0,
       "status": "fresh",
       "article_count": 2,
       "event_count": 2,
-      "latest_event_at": "2026-04-24T07:38:09.827815+00:00",
-      "age_days": 3.71,
-      "latest_title": "edward-kim-dev/kr-pc-deals-mcp",
-      "latest_url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "latest_event_at": "2026-05-07T09:30:52.677695+00:00",
+      "age_days": 0.0,
+      "latest_title": "daiso-mcp",
+      "latest_url": "https://github.com/hmmhmmhm/daiso-mcp",
       "latest_mcp_domain": [
-        "가격"
+        "daiso",
+        "재고",
+        "가격",
+        "상품",
+        "매장",
+        "다이소"
       ],
-      "latest_provider": [],
+      "latest_provider": [
+        "daiso",
+        "다이소"
+      ],
       "latest_capability": [
-        "검색"
+        "검색",
+        "조회"
       ],
       "latest_risk_scope": [],
       "latest_required_field_proxy": {
@@ -75,44 +130,111 @@
         "source_section": true,
         "source_url": true
       },
+      "controlled_rollout": {},
       "errors": []
     },
     {
       "source": "hmmhmmhm/daiso-mcp",
       "source_type": "mcp_server",
-      "enabled": false,
+      "enabled": true,
       "trust_tier": "T4_community",
       "content_type": "mcp_tool_result",
       "collection_tier": "C4_mcp_tool",
       "producer_role": "",
       "info_purpose": [],
       "tracked": true,
-      "event_model": "mcp_directory_entry",
+      "event_model": "mcp_tool_result",
       "repository": "hmmhmmhm/daiso-mcp",
-      "activation_status": "blocked_tool_allowlist_unresolved",
-      "activation_gates": [
-        "risk_scope_review_required",
-        "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
-        "registry_crosscheck_required",
-        "fake_transport_smoke_test_required"
-      ],
-      "tools_count": 0,
-      "env_count": 3,
+      "activation_status": "real_transport_smoke_test_passed",
+      "activation_gates": [],
+      "activation_gate_count": 0,
+      "activation_next_gate": "",
+      "activation_command_discovery_status": "",
+      "activation_command_discovery_checked_at": "",
+      "tools_count": 3,
+      "env_count": 0,
+      "env_preflight_status": "not_required",
+      "env_required_names": [],
+      "env_missing_names": [],
       "repository_metadata_gaps": [],
+      "repository_metadata": {
+        "status": "fresh",
+        "repository": "hmmhmmhm/daiso-mcp",
+        "checked_at": "2026-05-07T05:20:56+00:00",
+        "age_days": 0.17,
+        "freshness_sla_days": 7.0,
+        "missing_fields": [],
+        "github_pushed_at": "2026-05-06T18:49:16Z",
+        "github_license": "MIT",
+        "github_archived": false,
+        "github_disabled": false,
+        "docs_advisory_checked_at": "2026-04-30T05:06:52+00:00",
+        "github_readme_present": true,
+        "github_readme_path": "README.md",
+        "github_docs_present": true,
+        "github_docs_paths": [
+          "README.md",
+          "SECURITY.md",
+          "docs/"
+        ],
+        "github_security_policy_present": true,
+        "github_security_policy_paths": [
+          "SECURITY.md"
+        ],
+        "github_security_advisory_access_status": "checked",
+        "github_security_advisory_count": 0,
+        "github_security_advisory_open_count": 0,
+        "github_security_advisory_published_count": 0,
+        "github_security_advisory_state_counts": {},
+        "github_security_advisory_ids": []
+      },
       "freshness_sla_days": 7.0,
-      "status": "skipped_disabled",
-      "article_count": 0,
-      "event_count": 0,
-      "latest_event_at": null,
-      "age_days": null,
-      "latest_title": "",
-      "latest_url": "",
-      "latest_mcp_domain": [],
+      "status": "fresh",
+      "article_count": 10,
+      "event_count": 10,
+      "latest_event_at": "2026-05-07T09:30:54.645363+00:00",
+      "age_days": 0.0,
+      "latest_title": "용인강남대점",
+      "latest_url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
+      "latest_mcp_domain": [
+        "address"
+      ],
       "latest_provider": [],
-      "latest_capability": [],
-      "latest_risk_scope": [],
-      "latest_required_field_proxy": {},
+      "latest_capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "latest_risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "latest_required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      },
+      "controlled_rollout": {
+        "status": "passed",
+        "article_count": 10,
+        "non_empty_summary_count": 10,
+        "exact_fallback_link_count": 0,
+        "duplicate_link_count": 0,
+        "duplicate_title_count": 0,
+        "source_mismatch_count": 0,
+        "category_mismatch_count": 0,
+        "thresholds": {
+          "min_article_count": 3,
+          "require_non_empty_summary_count_equals_article_count": true,
+          "max_exact_fallback_link_count": 0,
+          "max_duplicate_link_count": 0,
+          "expected_source_name": "hmmhmmhm/daiso-mcp",
+          "expected_category": "commerce_mcp"
+        },
+        "failures": [],
+        "warnings": []
+      },
       "errors": []
     },
     {
@@ -125,18 +247,54 @@
       "producer_role": "",
       "info_purpose": [],
       "tracked": true,
-      "event_model": "mcp_directory_entry",
+      "event_model": "mcp_tool_result",
       "repository": "edward-kim-dev/kr-pc-deals-mcp",
       "activation_status": "blocked_env_required",
       "activation_gates": [
-        "risk_scope_review_required",
-        "env_secret_documentation_required",
-        "registry_crosscheck_required",
-        "fake_transport_smoke_test_required"
+        "real_transport_smoke_test_required"
       ],
+      "activation_gate_count": 1,
+      "activation_next_gate": "real_transport_smoke_test_required",
+      "activation_command_discovery_status": "",
+      "activation_command_discovery_checked_at": "",
       "tools_count": 11,
       "env_count": 1,
+      "env_preflight_status": "missing_required_env",
+      "env_required_names": [
+        "ZYTE_API_KEY"
+      ],
+      "env_missing_names": [
+        "ZYTE_API_KEY"
+      ],
       "repository_metadata_gaps": [],
+      "repository_metadata": {
+        "status": "fresh",
+        "repository": "edward-kim-dev/kr-pc-deals-mcp",
+        "checked_at": "2026-05-07T05:20:56+00:00",
+        "age_days": 0.17,
+        "freshness_sla_days": 7.0,
+        "missing_fields": [],
+        "github_pushed_at": "2026-03-31T01:14:59Z",
+        "github_license": "MIT",
+        "github_archived": false,
+        "github_disabled": false,
+        "docs_advisory_checked_at": "2026-04-30T05:06:52+00:00",
+        "github_readme_present": true,
+        "github_readme_path": "README.md",
+        "github_docs_present": true,
+        "github_docs_paths": [
+          "README.md",
+          "docs/"
+        ],
+        "github_security_policy_present": false,
+        "github_security_policy_paths": [],
+        "github_security_advisory_access_status": "checked",
+        "github_security_advisory_count": 0,
+        "github_security_advisory_open_count": 0,
+        "github_security_advisory_published_count": 0,
+        "github_security_advisory_state_counts": {},
+        "github_security_advisory_ids": []
+      },
       "freshness_sla_days": 7.0,
       "status": "skipped_disabled",
       "article_count": 0,
@@ -150,31 +308,408 @@
       "latest_capability": [],
       "latest_risk_scope": [],
       "latest_required_field_proxy": {},
+      "controlled_rollout": {},
       "errors": []
     }
   ],
   "events": [
     {
-      "source": "awesome-mcp-korea Commerce & Retail",
-      "event_model": "mcp_directory_entry",
-      "title": "edward-kim-dev/kr-pc-deals-mcp",
-      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
-      "event_at": "2026-04-24T07:38:09.827815+00:00",
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "용인강남대점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645363+00:00",
       "mcp_domain": [
-        "가격"
+        "address"
       ],
       "provider": [],
       "capability": [
-        "검색"
+        "address",
+        "opentime",
+        "closetime"
       ],
-      "risk_scope": [],
-      "project_health": [
-        "mcp",
-        "서버"
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
       ],
+      "project_health": [],
       "required_field_proxy": {
         "repository": true,
-        "source_section": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "risk_scope_signal",
+      "title": "용인강남대점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645363+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "risk_scope": true,
+        "evidence_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "강남역점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645333+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "risk_scope_signal",
+      "title": "강남역점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645333+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "risk_scope": true,
+        "evidence_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "강남역2호점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645297+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "risk_scope_signal",
+      "title": "강남역2호점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645297+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "risk_scope": true,
+        "evidence_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "강남세곡점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645225+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "risk_scope_signal",
+      "title": "강남세곡점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.645225+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "risk_scope": true,
+        "evidence_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "강남구청역점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.643766+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "risk_scope_signal",
+      "title": "강남구청역점",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90",
+      "event_at": "2026-05-07T09:30:54.643766+00:00",
+      "mcp_domain": [
+        "address"
+      ],
+      "provider": [],
+      "capability": [
+        "address",
+        "opentime",
+        "closetime"
+      ],
+      "risk_scope": [
+        "address",
+        "lat",
+        "lng"
+      ],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "risk_scope": true,
+        "evidence_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "샌디스크 USB메모리 32GB",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#1037467",
+      "event_at": "2026-05-07T09:30:54.643663+00:00",
+      "mcp_domain": [
+        "price",
+        "pickupavailable",
+        "daisomall"
+      ],
+      "provider": [
+        "daisomall",
+        "daisomall.co.kr"
+      ],
+      "capability": [
+        "pickupavailable"
+      ],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "3 in 1 충전케이블 (USB A TO 5,8,C) -H(화이트)",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#1060096",
+      "event_at": "2026-05-07T09:30:54.643641+00:00",
+      "mcp_domain": [
+        "price",
+        "pickupavailable",
+        "daisomall"
+      ],
+      "provider": [
+        "daisomall",
+        "daisomall.co.kr"
+      ],
+      "capability": [
+        "pickupavailable"
+      ],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "UV/LED젤램프(6구/USB형)",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#1036313",
+      "event_at": "2026-05-07T09:30:54.643619+00:00",
+      "mcp_domain": [
+        "price",
+        "pickupavailable",
+        "daisomall"
+      ],
+      "provider": [
+        "daisomall",
+        "daisomall.co.kr"
+      ],
+      "capability": [
+        "pickupavailable"
+      ],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "액센_USB메모리 32GB",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#1051354",
+      "event_at": "2026-05-07T09:30:54.643564+00:00",
+      "mcp_domain": [
+        "price",
+        "pickupavailable",
+        "daisomall"
+      ],
+      "provider": [
+        "daisomall",
+        "daisomall.co.kr"
+      ],
+      "capability": [
+        "pickupavailable"
+      ],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "mcp_tool_result",
+      "title": "USB타입 모기유인퇴치기",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp#1062147",
+      "event_at": "2026-05-07T09:30:54.643124+00:00",
+      "mcp_domain": [
+        "price",
+        "pickupavailable",
+        "daisomall"
+      ],
+      "provider": [
+        "daisomall",
+        "daisomall.co.kr"
+      ],
+      "capability": [
+        "pickupavailable"
+      ],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "tool_name": true,
         "source_url": true
       }
     },
@@ -183,12 +718,19 @@
       "event_model": "mcp_directory_entry",
       "title": "daiso-mcp",
       "url": "https://github.com/hmmhmmhm/daiso-mcp",
-      "event_at": "2026-04-24T07:38:09.827785+00:00",
+      "event_at": "2026-05-07T09:30:52.677695+00:00",
       "mcp_domain": [
+        "daiso",
         "재고",
-        "가격"
+        "가격",
+        "상품",
+        "매장",
+        "다이소"
       ],
-      "provider": [],
+      "provider": [
+        "daiso",
+        "다이소"
+      ],
       "capability": [
         "검색",
         "조회"
@@ -203,21 +745,112 @@
         "source_section": true,
         "source_url": true
       }
+    },
+    {
+      "source": "awesome-mcp-korea Commerce & Retail",
+      "event_model": "mcp_directory_entry",
+      "title": "edward-kim-dev/kr-pc-deals-mcp",
+      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "event_at": "2026-04-30T08:36:50.545238+00:00",
+      "mcp_domain": [
+        "가격"
+      ],
+      "provider": [],
+      "capability": [
+        "검색"
+      ],
+      "risk_scope": [],
+      "project_health": [
+        "mcp",
+        "서버"
+      ],
+      "required_field_proxy": {
+        "repository": true,
+        "source_section": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "hmmhmmhm/daiso-mcp",
+      "event_model": "linked_repository_metadata",
+      "title": "hmmhmmhm/daiso-mcp repository metadata",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp",
+      "event_at": "2026-05-06T18:49:16+00:00",
+      "mcp_domain": [],
+      "provider": [],
+      "capability": [],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "archived": true,
+        "license": true,
+        "docs": true,
+        "security_advisory_check": true
+      },
+      "repository": "hmmhmmhm/daiso-mcp",
+      "repository_metadata_status": "fresh",
+      "repository_metadata_checked_at": "2026-05-07T05:20:56+00:00",
+      "github_pushed_at": "2026-05-06T18:49:16Z",
+      "github_license": "MIT",
+      "github_archived": false,
+      "github_readme_present": true,
+      "github_docs_present": true,
+      "github_docs_paths": [
+        "README.md",
+        "SECURITY.md",
+        "docs/"
+      ],
+      "github_security_policy_present": true,
+      "github_security_advisory_access_status": "checked",
+      "github_security_advisory_count": 0,
+      "github_security_advisory_open_count": 0
+    },
+    {
+      "source": "edward-kim-dev/kr-pc-deals-mcp",
+      "event_model": "linked_repository_metadata",
+      "title": "edward-kim-dev/kr-pc-deals-mcp repository metadata",
+      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "event_at": "2026-03-31T01:14:59+00:00",
+      "mcp_domain": [],
+      "provider": [],
+      "capability": [],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "archived": true,
+        "license": true,
+        "docs": true,
+        "security_advisory_check": true
+      },
+      "repository": "edward-kim-dev/kr-pc-deals-mcp",
+      "repository_metadata_status": "fresh",
+      "repository_metadata_checked_at": "2026-05-07T05:20:56+00:00",
+      "github_pushed_at": "2026-03-31T01:14:59Z",
+      "github_license": "MIT",
+      "github_archived": false,
+      "github_readme_present": true,
+      "github_docs_present": true,
+      "github_docs_paths": [
+        "README.md",
+        "docs/"
+      ],
+      "github_security_policy_present": false,
+      "github_security_advisory_access_status": "checked",
+      "github_security_advisory_count": 0,
+      "github_security_advisory_open_count": 0
     }
   ],
   "daily_review_items": [
     {
-      "reason": "mcp_candidate_disabled",
-      "source": "hmmhmmhm/daiso-mcp",
-      "repository": "hmmhmmhm/daiso-mcp",
-      "activation_status": "blocked_tool_allowlist_unresolved",
-      "activation_gates": [
-        "risk_scope_review_required",
-        "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
-        "registry_crosscheck_required",
-        "fake_transport_smoke_test_required"
-      ]
+      "reason": "mcp_env_preflight_missing",
+      "source": "edward-kim-dev/kr-pc-deals-mcp",
+      "repository": "edward-kim-dev/kr-pc-deals-mcp",
+      "missing_env": [
+        "ZYTE_API_KEY"
+      ],
+      "activation_status": "blocked_env_required"
     },
     {
       "reason": "mcp_candidate_disabled",
@@ -225,10 +858,7 @@
       "repository": "edward-kim-dev/kr-pc-deals-mcp",
       "activation_status": "blocked_env_required",
       "activation_gates": [
-        "risk_scope_review_required",
-        "env_secret_documentation_required",
-        "registry_crosscheck_required",
-        "fake_transport_smoke_test_required"
+        "real_transport_smoke_test_required"
       ]
     }
   ],

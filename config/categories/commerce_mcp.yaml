@@ -9,6 +9,7 @@ data_quality:
     dated_freshness_report_pattern: reports/commerce_mcp_YYYYMMDD_quality.json
     tracked_event_models:
     - mcp_directory_entry
+    - mcp_tool_result
     - linked_repository_metadata
     - risk_scope_signal
   event_models:
@@ -18,6 +19,13 @@ data_quality:
       required_fields:
       - repository
       - source_section
+      - source_url
+    mcp_tool_result:
+      date_fields:
+      - collected_at
+      required_fields:
+      - repository
+      - tool_name
       - source_url
     linked_repository_metadata:
       date_fields:
@@ -74,52 +82,219 @@ sources:
 - id: mcp_candidate_hmmhmmhm_daiso_mcp
   name: hmmhmmhm/daiso-mcp
   type: mcp_server
-  enabled: false
+  enabled: true
   url: https://github.com/hmmhmmhm/daiso-mcp
-  transport: stdio
+  transport: streamable_http
   trust_tier: T4_community
   collection_tier: C4_mcp_tool
   content_type: mcp_tool_result
   risk_scope:
-  - external_api_key
   - network_read
-  - tool_allowlist_unresolved
-  - user_account_scope
-  - write_or_mutation_possible
-  notes: Activation audit applied; source remains disabled until transport smoke tests
-    and required secrets are validated.
+  notes: >-
+    Fake stdio transport smoke passed with the original allowlisted Daiso read
+    tools on 2026-04-29. npm package metadata cross-check passed on 2026-04-29.
+    Node 20 override showed the npm package is a CLI wrapper, not a stdio MCP
+    server; the CLI exposes https://mcp.aka.page/mcp as a remote MCP endpoint.
+    Real streamable HTTP smoke passed on 2026-04-29 for product search, store
+    search, and price lookup. Inventory and display location calls returned 403
+    Unauthorized with sample IDs, so they remain out of the production
+    allowlist. Remote endpoint registry/risk review passed with scope limits on
+    2026-04-29: the endpoint exposes 32 tools across multiple retail/venue
+    domains, but the configured Daiso allowlist has no missing tools or prefix
+    drift. Source is active under controlled rollout guardrails.
+    Controlled collector-path canary passed with warnings on 2026-04-29: 11
+    normalized articles were produced from the three configured tools with no
+    exact fallback links and no hard failures, but one product appears in both
+    search and price outputs, producing one duplicate title/link pair that
+    was removed by canonical link deduplication before broader rollout.
+    Enablement decision package was built on 2026-04-29 and found the candidate
+    ready for controlled enablement review. Controlled rollout was activated on
+    2026-04-29 after a preflight canary passed within the configured guardrails.
   config:
     repository: hmmhmmhm/daiso-mcp
     source_seed: awesome-mcp-korea
     source_section: Commerce & Retail
-    activation_status: blocked_tool_allowlist_unresolved
-    activation_audited_at: '2026-04-14T01:55:57.420863+00:00'
-    metadata_checked_at: '2026-04-14T01:30:44.113793+00:00'
+    activation_status: real_transport_smoke_test_passed
+    activation_audited_at: '2026-04-29T09:44:35+00:00'
+    fake_transport_smoke_tested_at: '2026-04-29T07:14:18+00:00'
+    stdio_transport_probe_failed_at: '2026-04-29T09:27:12+00:00'
+    real_transport_smoke_tested_at: '2026-04-29T09:44:35+00:00'
+    transport_mode_confirmed_at: '2026-04-29T09:44:35+00:00'
+    transport_mode_summary: daiso@1.0.4 requires Node >=20 <21 for its CLI,
+      but the package command is not a stdio MCP server. The CLI exposes a
+      remote streamable HTTP/SSE endpoint at https://mcp.aka.page/mcp.
+    unsupported_tools:
+    - name: daiso_check_inventory
+      reason: Real remote tool call returned 403 Unauthorized with sample product/store input.
+    - name: daiso_get_display_location
+      reason: Real remote tool call returned 403 Unauthorized with sample product/store input.
+    server_url: https://mcp.aka.page/mcp
+    remote_transport_hint: sse
+    remote_health_status: ok
+    remote_health_checked_at: '2026-04-29T09:27:59.632Z'
+    remote_registration_hint: claude mcp add daiso https://mcp.aka.page --transport
+      sse
+    remote_endpoint_registry_review_status: passed_with_scope_limits
+    remote_endpoint_registry_reviewed_at: '2026-04-29T09:51:12+00:00'
+    remote_server_info:
+      name: multi-service-mcp
+      version: 1.0.0
+    remote_tool_count: 32
+    remote_allowlist_drift_status: passed
+    remote_allowlist_drift_checked_at: '2026-04-29T09:51:12+00:00'
+    remote_allowlist_missing_tools: []
+    remote_allowlist_prefix_mismatches: []
+    remote_out_of_scope_tool_count: 29
+    remote_out_of_scope_prefixes:
+      cgv: 3
+      cu: 2
+      daiso: 2
+      emart24: 3
+      gs25: 3
+      lottecinema: 3
+      lottemart: 2
+      megabox: 3
+      oliveyoung: 3
+      seveneleven: 5
+    remote_out_of_scope_daiso_tools:
+    - daiso_check_inventory
+    - daiso_get_display_location
+    risk_review_status: passed_with_scope_limits
+    risk_reviewed_at: '2026-04-29T09:51:12+00:00'
+    risk_review_summary: Remote endpoint is a multi-service MCP endpoint. CommerceMCPRadar
+      production scope is limited to the configured three Daiso read-only tools,
+      and the collector invokes only configured tools/resources.
+    production_enablement_status: controlled_rollout_enabled
+    production_enablement_decision_status: ready_for_controlled_enablement_review
+    production_enablement_decision_at: '2026-04-29T10:20:43+00:00'
+    production_enablement_recommended_option: controlled_enablement
+    production_enablement_source_enabled_after_decision: true
+    production_enablement_decision_failed_checks: []
+    production_enablement_decision_artifact: _workspace/2026-04-29_cycle42_daiso_enablement_decision.json
+    production_enablement_review_notes:
+    - Remote MCP endpoint is multi-service, so non-allowlisted tools must remain
+      blocked by config.
+    - Canary warning is limited to one duplicate product emitted by search and
+      price lookup.
+    - Controlled enablement is active and must be rolled back if monitoring
+      thresholds are exceeded.
+    production_rollout_options:
+    - name: stay_disabled
+      status: rollback_available
+    - name: manual_canary_only
+      status: rollback_available
+    - name: controlled_enablement
+      status: active
+    production_rollout_status: active
+    production_rollout_enabled_at: '2026-04-29T10:37:07+00:00'
+    production_rollout_preflight_artifact: _workspace/2026-04-29_cycle43_daiso_rollout_preflight_canary.json
+    production_rollout_validation_artifact: _workspace/2026-04-29_cycle43_daiso_controlled_rollout_validation.json
+    production_rollout_monitored_at: '2026-04-29T11:32:49+00:00'
+    production_rollout_monitor_artifact: _workspace/2026-04-29_cycle46_mcp_controlled_rollout_monitor.json
+    production_deduplication_status: active
+    production_deduplicated_at: '2026-04-29T11:32:49+00:00'
+    production_canary_status: passed_with_warnings
+    production_canary_tested_at: '2026-04-29T10:07:04+00:00'
+    production_canary_article_count: 11
+    production_canary_non_empty_summary_count: 11
+    production_canary_exact_fallback_link_count: 0
+    production_canary_duplicate_link_count: 1
+    production_canary_duplicate_title_count: 1
+    production_canary_source_names:
+    - hmmhmmhm/daiso-mcp
+    production_canary_categories:
+    - commerce_mcp
+    production_canary_warnings:
+    - Product search and price lookup can emit the same product, producing one
+      duplicate normalized title/link pair in the canary run.
+    production_monitoring_metrics:
+      min_article_count: 3
+      require_non_empty_summary_count_equals_article_count: true
+      max_exact_fallback_link_count: 0
+      max_duplicate_link_count: 0
+      expected_source_name: hmmhmmhm/daiso-mcp
+      expected_category: commerce_mcp
+    production_rollback_criteria:
+    - canary_execution_error
+    - missing_configured_tool
+    - non_empty_summary_count_below_article_count
+    - exact_fallback_link_count_above_zero
+    - duplicate_link_count_above_zero
+    - unexpected_source_or_category
+    production_collection_cadence: controlled_low_frequency_rollout
+    metadata_checked_at: '2026-05-07T05:20:56+00:00'
+    metadata_refresh_status: passed
+    metadata_refresh_artifact: _workspace/2026-05-07_mcp_github_repository_metadata_refresh.json
+    metadata_refresh_source: github_rest_api
     github_archived: false
     github_disabled: false
     github_license: MIT
-    github_pushed_at: '2026-04-13T15:51:45Z'
+    github_pushed_at: '2026-05-06T18:49:16Z'
     github_default_branch: main
-    github_stars: 284
+    github_stars: 296
+    github_head_sha: 6b4c6b8e9f9ead890d7bc00e0bafbcf6746abf43
+    docs_advisory_checked_at: '2026-04-30T05:06:52+00:00'
+    docs_advisory_audit_status: passed
+    docs_advisory_audit_artifact: _workspace/2026-04-30_cycle69_mcp_docs_advisory_audit.json
+    docs_advisory_audit_source: github_rest_api_contents_and_security_advisories_with_raw_html_fallback
+    github_readme_present: true
+    github_readme_path: README.md
+    github_readme_size: 17407
+    github_docs_present: true
+    github_docs_paths:
+      - README.md
+      - SECURITY.md
+      - docs/
+    github_docs_path_count: 3
+    github_security_policy_present: true
+    github_security_policy_paths:
+      - SECURITY.md
+    github_security_advisory_access_status: checked
+    github_security_advisory_count: 0
+    github_security_advisory_open_count: 0
+    github_security_advisory_published_count: 0
+    github_security_advisory_state_counts: {}
+    github_security_advisory_ids: []
+    package_registry: npm
+    package_registry_crosscheck_status: passed
+    package_registry_crosschecked_at: '2026-04-29T09:03:07+00:00'
+    package_name: daiso
+    package_version: 1.0.4
+    package_dist_tag_latest: 1.0.4
+    package_engines:
+      node: '>=20 <21'
+    package_bin:
+      daiso: dist/bin.js
+    package_repository: https://github.com/hmmhmmhm/daiso-mcp
+    package_license: MIT
+    package_modified_at: '2026-03-07T05:57:02.776Z'
+    package_maintainers:
+    - hmmhmmhm <hmmhmmhm@naver.com>
+    package_github_head_sha: d9feed3640e54eeb62852362878eeb90cf24ce59
+    command_semantics: package_cli_discovery_not_stdio_server
     command: npx
     args:
     - -y
     - daiso
-    env:
-    - GOOGLE_MAPS_API_KEY
-    - INVALID_ACTION_QUERY
-    - ZYTE_API_KEY
-    tools: []
+    env: []
+    tools:
+    - name: daiso_search_products
+      arguments:
+        query: USB
+        page: 1
+        pageSize: 5
+    - name: daiso_find_stores
+      arguments:
+        keyword: 강남
+        limit: 5
+    - name: daiso_get_price_info
+      arguments:
+        productName: USB
     resources: []
-    timeout_seconds: 20
+    timeout_seconds: 25
     max_items: 50
-    activation_gates:
-    - risk_scope_review_required
-    - env_secret_documentation_required
-    - tool_resource_allowlist_required
-    - registry_crosscheck_required
-    - fake_transport_smoke_test_required
-    event_model: mcp_directory_entry
+    activation_gates: []
+    event_model: mcp_tool_result
 - id: mcp_candidate_edward_kim_dev_kr_pc_deals_mcp
   name: edward-kim-dev/kr-pc-deals-mcp
   type: mcp_server
@@ -133,21 +308,71 @@ sources:
   - external_api_key
   - network_read
   - user_account_scope
-  notes: Activation audit applied; source remains disabled until transport smoke tests
-    and required secrets are validated.
+  - write_or_mutation_possible
+  notes: Repo-local fake stdio transport smoke passed for the configured PC
+    deals tool allowlist on 2026-05-01. Source remains disabled until
+    ZYTE_API_KEY, registry cross-check, risk review, and real transport
+    validation are completed; build mutation tools must be reviewed before any
+    real rollout.
   config:
     repository: edward-kim-dev/kr-pc-deals-mcp
     source_seed: awesome-mcp-korea
     source_section: Commerce & Retail
     activation_status: blocked_env_required
     activation_audited_at: '2026-04-14T01:55:57.420863+00:00'
-    metadata_checked_at: '2026-04-14T01:30:44.113793+00:00'
+    risk_scope_reviewed_at: '2026-05-07T07:23:36+00:00'
+    risk_scope_review_status: reviewed_static_allowlist
+    risk_scope_review_artifact: _workspace/2026-05-07_mcp_risk_scope_gate_closure.json
+    risk_scope_review_source: category_risk_scope_and_tool_allowlist
+    env_documentation_checked_at: '2026-05-07T06:55:56+00:00'
+    env_documentation_status: documented_no_secret_placeholder
+    env_documentation_artifact: _workspace/2026-05-07_mcp_env_documentation_manifest.json
+    env_documentation_source: repo_env_example_managed_block
+    package_registry: "npm"
+    package_name: "kr-pc-deals-mcp"
+    package_version: "1.0.7"
+    package_registry_url: "https://registry.npmjs.org/kr-pc-deals-mcp"
+    package_registry_http_status: 200
+    package_registry_crosschecked_at: "2026-05-07T07:48:43+00:00"
+    package_registry_crosscheck_status: "passed"
+    package_registry_crosscheck_artifact: "_workspace/2026-05-07_mcp_registry_crosscheck_gate_closure.json"
+    package_registry_crosscheck_source: "npm_npx_package_arg"
+    package_repository: "git+https://github.com/edward-kim-dev/kr-pc-deals-mcp.git"
+    metadata_checked_at: '2026-05-07T05:20:56+00:00'
+    metadata_refresh_status: passed
+    metadata_refresh_artifact: _workspace/2026-05-07_mcp_github_repository_metadata_refresh.json
+    metadata_refresh_source: github_rest_api
     github_archived: false
     github_disabled: false
     github_license: MIT
     github_pushed_at: '2026-03-31T01:14:59Z'
     github_default_branch: main
-    github_stars: 4
+    github_stars: 5
+    github_head_sha: 449fa8b816abcea743a4b792fc9eccac1278a682
+    docs_advisory_checked_at: '2026-04-30T05:06:52+00:00'
+    docs_advisory_audit_status: passed
+    docs_advisory_audit_artifact: _workspace/2026-04-30_cycle69_mcp_docs_advisory_audit.json
+    docs_advisory_audit_source: github_rest_api_contents_and_security_advisories_with_raw_html_fallback
+    github_readme_present: true
+    github_readme_path: README.md
+    github_readme_size: 6795
+    github_docs_present: true
+    github_docs_paths:
+      - README.md
+      - docs/
+    github_docs_path_count: 2
+    github_security_policy_present: false
+    github_security_policy_paths: []
+    github_security_advisory_access_status: checked
+    github_security_advisory_count: 0
+    github_security_advisory_open_count: 0
+    github_security_advisory_published_count: 0
+    github_security_advisory_state_counts: {}
+    github_security_advisory_ids: []
+    fake_transport_smoke_tested_at: '2026-05-01T04:00:00+00:00'
+    fake_transport_smoke_test_status: passed
+    fake_transport_smoke_test_artifact: _workspace/2026-05-01_cycle80_commerce_kr_pc_deals_fake_probe.json
+    fake_transport_fixture: fixtures/mcp/fake_kr_pc_deals_mcp.py
     command: npx
     args:
     - -y
@@ -170,11 +395,8 @@ sources:
     timeout_seconds: 20
     max_items: 50
     activation_gates:
-    - risk_scope_review_required
-    - env_secret_documentation_required
-    - registry_crosscheck_required
-    - fake_transport_smoke_test_required
-    event_model: mcp_directory_entry
+    - real_transport_smoke_test_required
+    event_model: mcp_tool_result
 entities:
 - name: MCPDomain
   display_name: MCP 도메인
@@ -186,10 +408,21 @@ entities:
   - shopping
   - price
   - stock
+  - productId
+  - productName
+  - currentPrice
+  - pickupAvailable
+  - address
+  - store
+  - daiso
+  - daisomall
   - 커머스
   - 쇼핑
   - 재고
   - 가격
+  - 상품
+  - 매장
+  - 다이소
   - 오픈마켓
 - name: Provider
   display_name: 서비스 제공자
@@ -205,11 +438,15 @@ entities:
   - dooray
   - naver works
   - tourapi
+  - daiso
+  - daisomall
+  - daisomall.co.kr
   - 한국투자증권
   - 네이버
   - 카카오
   - 기상청
   - 공공데이터
+  - 다이소
 - name: Capability
   display_name: 도구 기능
   keywords:
@@ -222,6 +459,12 @@ entities:
   - message
   - calendar
   - parse
+  - productName
+  - currentPrice
+  - pickupAvailable
+  - address
+  - openTime
+  - closeTime
   - 검색
   - 조회
   - 분석
@@ -241,6 +484,9 @@ entities:
   - message
   - calendar
   - location
+  - address
+  - lat
+  - lng
   - document
   - 주문
   - 메신저 보내기
