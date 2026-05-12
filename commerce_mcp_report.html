@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-visual-system="radar-unified-v2" data-visual-surface="report">
+<html lang="en" data-visual-system="radar-unified-v2" data-visual-surface="report" data-visual-page="daily-report">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,16 +12,27 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
   <style>
     :root {
-      --bg-page: #0b0b0f;
-      --bg-card: rgba(28, 26, 34, 0.86);
-      --bg-card-strong: rgba(36, 33, 43, 0.94);
-      --text-primary: #f4f4f7;
-      --text-secondary: rgba(244, 244, 247, 0.76);
-      --text-muted: rgba(244, 244, 247, 0.58);
-      --border-subtle: rgba(244, 244, 247, 0.14);
+      --vs-color-bg: #0b0b0f;
+      --vs-color-surface: rgba(28, 26, 34, 0.86);
+      --vs-color-surface-strong: rgba(36, 33, 43, 0.94);
+      --vs-color-text: #f4f4f7;
+      --vs-color-text-secondary: rgba(244, 244, 247, 0.76);
+      --vs-color-muted: rgba(244, 244, 247, 0.58);
+      --vs-color-border: rgba(244, 244, 247, 0.14);
+      --vs-color-accent: #33d6c5;
+      --vs-radius-sm: 6px;
+      --vs-radius-md: 8px;
+      --vs-font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg-page: var(--vs-color-bg);
+      --bg-card: var(--vs-color-surface);
+      --bg-card-strong: var(--vs-color-surface-strong);
+      --text-primary: var(--vs-color-text);
+      --text-secondary: var(--vs-color-text-secondary);
+      --text-muted: var(--vs-color-muted);
+      --border-subtle: var(--vs-color-border);
       --shadow-card: 0 14px 42px rgba(0,0,0,0.34);
       --shadow-card-hover: 0 18px 52px rgba(0,0,0,0.42);
-      --accent-teal: #33d6c5;
+      --accent-teal: var(--vs-color-accent);
       --accent-blue: #19b591;
       --accent-yellow: #f6c84c;
       --accent-indigo: #78a2ff;
@@ -31,11 +42,11 @@
       --error-bg: rgba(255, 91, 110, 0.13);
       --error-border: rgba(255, 91, 110, 0.28);
       --error-text: #ff9ca8;
-      --radius-sm: 6px;
-      --radius-md: 8px;
+      --radius-sm: var(--vs-radius-sm);
+      --radius-md: var(--vs-radius-md);
       --radius-full: 9999px;
       --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
-      --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-sans: var(--vs-font-sans);
     }
     * { box-sizing: border-box; }
     body {
@@ -249,7 +260,7 @@
     <header class="header">
       <div class="header__info">
         <h1 class="header__title">커머스 MCP 레이더</h1>
-        <div class="header__timestamp">Generated 2026-05-12T03:42:09.900566+00:00 UTC</div>
+        <div class="header__timestamp">Generated 2026-05-12T20:28:17.152554+00:00 UTC</div>
       </div>
       <div id="export-actions" class="export-actions"><button class="btn-export" id="btn-csv" onclick="exportCSV()">Export CSV</button></div>
     </header>
@@ -258,15 +269,15 @@
     <div class="summary-grid">
       <div class="stat-card">
         <div class="stat-card__label">Sources</div>
-        <div class="stat-card__value">1</div>
+        <div class="stat-card__value">3</div>
       </div>
       <div class="stat-card stat-card--blue">
         <div class="stat-card__label">Collected</div>
-        <div class="stat-card__value">2</div>
+        <div class="stat-card__value">12</div>
       </div>
       <div class="stat-card stat-card--yellow">
         <div class="stat-card__label">Entity Hits</div>
-        <div class="stat-card__value">2</div>
+        <div class="stat-card__value">12</div>
       </div>
       <div class="stat-card stat-card--indigo">
         <div class="stat-card__label">Window (days)</div>
@@ -318,17 +329,59 @@
     </div>
 
     
+    <h2 class="section-title" id="mcp-quality-heading">MCP Source Quality</h2>
+    <section id="mcp-quality" class="quality-panel" aria-label="MCP source quality">
+      <div class="quality-grid">
+        <div class="quality-metric">
+          <span class="quality-metric__label">MCP candidates</span>
+          <span class="quality-metric__value">2</span>
+        </div>
+        <div class="quality-metric">
+          <span class="quality-metric__label">Enabled tools</span>
+          <span class="quality-metric__value">1</span>
+        </div>
+        <div class="quality-metric">
+          <span class="quality-metric__label">Tool results</span>
+          <span class="quality-metric__value">10</span>
+        </div>
+        <div class="quality-metric">
+          <span class="quality-metric__label">Metadata gaps</span>
+          <span class="quality-metric__value">0</span>
+        </div>
+        <div class="quality-metric">
+          <span class="quality-metric__label">Review items</span>
+          <span class="quality-metric__value">2</span>
+        </div>
+      </div>
+      
+      <p class="article-card__summary">commerce_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.</p>
+      
+      
+      <ul class="quality-list">
+        
+        <li><strong>mcp_env_preflight_missing</strong> - edward-kim-dev/kr-pc-deals-mcp / edward-kim-dev/kr-pc-deals-mcp</li>
+        
+        <li><strong>mcp_candidate_disabled</strong> - edward-kim-dev/kr-pc-deals-mcp / edward-kim-dev/kr-pc-deals-mcp</li>
+        
+      </ul>
+      
+    </section>
+    
 
     <!-- Entity Hits -->
     
     <h2 class="section-title">Entity Hit Counts</h2>
     <div class="entity-section">
       
+        <span class="pill">MCPDomain · 27</span>
+      
+        <span class="pill">Capability · 23</span>
+      
+        <span class="pill">RiskScope · 15</span>
+      
+        <span class="pill">Provider · 12</span>
+      
         <span class="pill">ProjectHealth · 4</span>
-      
-        <span class="pill">MCPDomain · 3</span>
-      
-        <span class="pill">Capability · 3</span>
       
     </div>
     
@@ -336,6 +389,246 @@
     <!-- Articles -->
     <h2 class="section-title" id="articles-heading">Recent Articles</h2>
     <div class="articles-grid" id="articles-list">
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90" target="_blank" rel="noopener noreferrer">용인강남대점</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"address": "경기도 용인시 기흥구 강남로 7(구갈동)2층", "closeTime": "22:00", "lat": 37.271313997175, "lng": 127.126545716359, "name": "용인강남대점", "openTime": "09:30", "options": {"cashless": false, "elevator": false, "groupOrder": false,…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: address</span>
+          
+            <span class="chip">Capability: address, opentime, closetime</span>
+          
+            <span class="chip">RiskScope: address, lat, lng</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90" target="_blank" rel="noopener noreferrer">강남역점</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"address": "서울특별시 강남구 강남대로 422 (역삼동)B3~B1층", "closeTime": "22:00", "lat": 37.5003941401087, "lng": 127.026984908497, "name": "강남역점", "openTime": "10:00", "options": {"cashless": false, "elevator": true, "groupOrder": fa…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: address</span>
+          
+            <span class="chip">Capability: address, opentime, closetime</span>
+          
+            <span class="chip">RiskScope: address, lat, lng</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90" target="_blank" rel="noopener noreferrer">강남역2호점</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"address": "서울특별시 강남구 테헤란로 109 (역삼동)B1층", "closeTime": "22:00", "lat": 37.4988253733783, "lng": 127.028991540151, "name": "강남역2호점", "openTime": "10:00", "options": {"cashless": false, "elevator": false, "groupOrder": fa…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: address</span>
+          
+            <span class="chip">Capability: address, opentime, closetime</span>
+          
+            <span class="chip">RiskScope: address, lat, lng</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90" target="_blank" rel="noopener noreferrer">강남세곡점</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"address": "서울특별시 강남구 헌릉로569길 21-36 (세곡동)1층", "closeTime": "22:00", "lat": 37.466384584183, "lng": 127.100161667344, "name": "강남세곡점", "openTime": "10:00", "options": {"cashless": false, "elevator": false, "groupOrder": …</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: address</span>
+          
+            <span class="chip">Capability: address, opentime, closetime</span>
+          
+            <span class="chip">RiskScope: address, lat, lng</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90" target="_blank" rel="noopener noreferrer">강남구청역점</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"address": "서울특별시 강남구 학동로 지하 346 (삼성동)B1층", "closeTime": "22:00", "lat": 37.5171892352971, "lng": 127.04130142966, "name": "강남구청역점", "openTime": "10:00", "options": {"cashless": false, "elevator": false, "groupOrder": f…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: address</span>
+          
+            <span class="chip">Capability: address, opentime, closetime</span>
+          
+            <span class="chip">RiskScope: address, lat, lng</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#1037467" target="_blank" rel="noopener noreferrer">샌디스크 USB메모리 32GB</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"id": "1037467", "imageUrl": "https://cdn.daisomall.co.kr/file/PD/20250711/7skym8uzajyOapFf9kPC1037467_00_007skym8uzajyOapFf9kPC.jpg", "isNew": false, "name": "샌디스크 USB메모리 32GB", "pickupAvailable": true, "price": 5000, …</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: price, pickupavailable, daisomall</span>
+          
+            <span class="chip">Provider: daisomall, daisomall.co.kr</span>
+          
+            <span class="chip">Capability: pickupavailable</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#1060096" target="_blank" rel="noopener noreferrer">3 in 1 충전케이블 (USB A TO 5,8,C) -H(화이트)</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"id": "1060096", "imageUrl": "https://cdn.daisomall.co.kr/file/PD/20250102/TK31c0rG5EifZPlRH45W1060096_00_00TK31c0rG5EifZPlRH45W.jpg", "isNew": false, "name": "3 in 1 충전케이블 (USB A TO 5,8,C) -H(화이트) ", "pickupAvailable":…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: price, pickupavailable, daisomall</span>
+          
+            <span class="chip">Provider: daisomall, daisomall.co.kr</span>
+          
+            <span class="chip">Capability: pickupavailable</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#1036313" target="_blank" rel="noopener noreferrer">UV/LED젤램프(6구/USB형)</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"id": "1036313", "imageUrl": "https://cdn.daisomall.co.kr/file/PD/20240419/3afVxroaWHi4pov0iFKa1036313_00_003afVxroaWHi4pov0iFKa.jpg", "isNew": false, "name": "UV/LED젤램프(6구/USB형)", "pickupAvailable": true, "price": 3000…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: price, pickupavailable, daisomall</span>
+          
+            <span class="chip">Provider: daisomall, daisomall.co.kr</span>
+          
+            <span class="chip">Capability: pickupavailable</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#1051354" target="_blank" rel="noopener noreferrer">액센_USB메모리 32GB</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"id": "1051354", "imageUrl": "https://cdn.daisomall.co.kr/file/PD/20240529/T4liLStKBIvMYhh4LKYS1051354_00_07T4liLStKBIvMYhh4LKYS.jpg", "isNew": false, "name": "액센_USB메모리 32GB", "pickupAvailable": false, "price": 5000, "…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: price, pickupavailable, daisomall</span>
+          
+            <span class="chip">Provider: daisomall, daisomall.co.kr</span>
+          
+            <span class="chip">Capability: pickupavailable</span>
+          
+        </div>
+        
+      </div>
+      
+      <div class="article-card">
+        <div class="article-card__title">
+          <a href="https://github.com/hmmhmmhm/daiso-mcp#1062147" target="_blank" rel="noopener noreferrer">USB타입 모기유인퇴치기</a>
+        </div>
+        <div class="article-card__meta">
+          <span class="source-badge">hmmhmmhm/daiso-mcp</span>
+          
+          <span class="article-card__date">2026-05-12</span>
+          
+        </div>
+        <div class="article-card__summary">{"id": "1062147", "imageUrl": "https://cdn.daisomall.co.kr/file/PD/20251223/GWapdfxaqEnPxIJMRf2R1062147_00_00GWapdfxaqEnPxIJMRf2R.jpg", "isNew": false, "name": "USB타입 모기유인퇴치기", "pickupAvailable": false, "price": 5000, "s…</div>
+        
+        <div>
+          
+            <span class="chip">MCPDomain: price, pickupavailable, daisomall</span>
+          
+            <span class="chip">Provider: daisomall, daisomall.co.kr</span>
+          
+            <span class="chip">Capability: pickupavailable</span>
+          
+        </div>
+        
+      </div>
       
       <div class="article-card">
         <div class="article-card__title">
@@ -375,7 +668,9 @@
         
         <div>
           
-            <span class="chip">MCPDomain: 재고, 가격</span>
+            <span class="chip">MCPDomain: daiso, 재고, 가격, 상품, 매장, 다이소</span>
+          
+            <span class="chip">Provider: daiso, 다이소</span>
           
             <span class="chip">Capability: 검색, 조회</span>
           
@@ -390,13 +685,13 @@
 
     <!-- Footer -->
     <footer class="footer">
-      Radar Report — generated 2026-05-12T03:42:09.900566+00:00 UTC
+      Radar Report — generated 2026-05-12T20:28:17.152554+00:00 UTC
     </footer>
   </div>
 
   <!-- Data blocks -->
-  <script id="articles-data" type="application/json">[{"collected_at": "2026-05-12T03:42:09.849110", "link": "https://github.com/edward-kim-dev/kr-pc-deals-mcp", "matched_entities": {"Capability": ["\uac80\uc0c9"], "MCPDomain": ["\uac00\uaca9"], "ProjectHealth": ["mcp", "\uc11c\ubc84"]}, "published": "2026-05-12T03:42:09.828007", "published_at": "2026-05-12T03:42:09.828007", "source": "awesome-mcp-korea Commerce \u0026 Retail", "summary": "\ub2e4\ub098\uc640\u00b7\ucef4\ud4e8\uc874 PC \ubd80\ud488 \ucd5c\uc800\uac00 \uac80\uc0c9, \uac00\uaca9 \ube44\uad50, \uac00\uaca9 \uc774\ub825, \ube4c\ub4dc \uacac\uc801, CPU-\uba54\uc778\ubcf4\ub4dc-RAM \ud638\ud658\uc131 \uccb4\ud06c\ub97c \uc81c\uacf5\ud558\ub294 MCP \uc11c\ubc84\uc785\ub2c8\ub2e4.", "title": "edward-kim-dev/kr-pc-deals-mcp"}, {"collected_at": "2026-05-12T03:42:09.849110", "link": "https://github.com/hmmhmmhm/daiso-mcp", "matched_entities": {"Capability": ["\uac80\uc0c9", "\uc870\ud68c"], "MCPDomain": ["\uc7ac\uace0", "\uac00\uaca9"], "ProjectHealth": ["mcp", "\uc11c\ubc84"]}, "published": "2026-05-12T03:42:09.827983", "published_at": "2026-05-12T03:42:09.827983", "source": "awesome-mcp-korea Commerce \u0026 Retail", "summary": "\uc8fc\ubcc0 \ub2e4\uc774\uc18c \ub9e4\uc7a5\uc744 \uac80\uc0c9\ud558\uace0, \uc6d0\ud558\ub294 \uc0c1\ud488\uc758 \uc7ac\uace0 \uc5ec\ubd80 \ubc0f \uac00\uaca9\uc744 \uc870\ud68c\ud558\ub294 MCP \uc11c\ubc84. ChatGPT, Claude, Grok \ub4f1 AI \uc571\uacfc \uc5f0\ub3d9 \uac00\ub2a5.", "title": "daiso-mcp"}]</script>
-  <script id="entities-data" type="application/json">{"Capability": 3, "MCPDomain": 3, "ProjectHealth": 4}</script>
+  <script id="articles-data" type="application/json">[{"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90", "matched_entities": {"Capability": ["address", "opentime", "closetime"], "MCPDomain": ["address"], "RiskScope": ["address", "lat", "lng"]}, "published": "2026-05-12T20:28:17.013851", "published_at": "2026-05-12T20:28:17.013851", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"address\": \"\uacbd\uae30\ub3c4 \uc6a9\uc778\uc2dc \uae30\ud765\uad6c \uac15\ub0a8\ub85c 7(\uad6c\uac08\ub3d9)2\uce35\", \"closeTime\": \"22:00\", \"lat\": 37.271313997175, \"lng\": 127.126545716359, \"name\": \"\uc6a9\uc778\uac15\ub0a8\ub300\uc810\", \"openTime\": \"09:30\", \"options\": {\"cashless\": false, \"elevator\": false, \"groupOrder\": false, \"nameSticker\": false, \"parking\": true, \"photoSticker\": false, \"pickup\": false, \"ramp\": false, \"simCard\": false, \"taxFree\": false}, \"phone\": \"031-287-0603\"}", "title": "\uc6a9\uc778\uac15\ub0a8\ub300\uc810"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90", "matched_entities": {"Capability": ["address", "opentime", "closetime"], "MCPDomain": ["address"], "RiskScope": ["address", "lat", "lng"]}, "published": "2026-05-12T20:28:17.013833", "published_at": "2026-05-12T20:28:17.013833", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"address\": \"\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uac15\ub0a8\uad6c \uac15\ub0a8\ub300\ub85c 422 (\uc5ed\uc0bc\ub3d9)B3~B1\uce35\", \"closeTime\": \"22:00\", \"lat\": 37.5003941401087, \"lng\": 127.026984908497, \"name\": \"\uac15\ub0a8\uc5ed\uc810\", \"openTime\": \"10:00\", \"options\": {\"cashless\": false, \"elevator\": true, \"groupOrder\": false, \"nameSticker\": true, \"parking\": true, \"photoSticker\": true, \"pickup\": false, \"ramp\": false, \"simCard\": false, \"taxFree\": true}, \"phone\": \"1522-4400\"}", "title": "\uac15\ub0a8\uc5ed\uc810"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90", "matched_entities": {"Capability": ["address", "opentime", "closetime"], "MCPDomain": ["address"], "RiskScope": ["address", "lat", "lng"]}, "published": "2026-05-12T20:28:17.013810", "published_at": "2026-05-12T20:28:17.013810", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"address\": \"\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uac15\ub0a8\uad6c \ud14c\ud5e4\ub780\ub85c 109 (\uc5ed\uc0bc\ub3d9)B1\uce35\", \"closeTime\": \"22:00\", \"lat\": 37.4988253733783, \"lng\": 127.028991540151, \"name\": \"\uac15\ub0a8\uc5ed2\ud638\uc810\", \"openTime\": \"10:00\", \"options\": {\"cashless\": false, \"elevator\": false, \"groupOrder\": false, \"nameSticker\": false, \"parking\": false, \"photoSticker\": false, \"pickup\": true, \"ramp\": true, \"simCard\": true, \"taxFree\": true}, \"phone\": \"1522-4400\"}", "title": "\uac15\ub0a8\uc5ed2\ud638\uc810"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90", "matched_entities": {"Capability": ["address", "opentime", "closetime"], "MCPDomain": ["address"], "RiskScope": ["address", "lat", "lng"]}, "published": "2026-05-12T20:28:17.013783", "published_at": "2026-05-12T20:28:17.013783", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"address\": \"\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uac15\ub0a8\uad6c \ud5cc\ub989\ub85c569\uae38 21-36 (\uc138\uace1\ub3d9)1\uce35\", \"closeTime\": \"22:00\", \"lat\": 37.466384584183, \"lng\": 127.100161667344, \"name\": \"\uac15\ub0a8\uc138\uace1\uc810\", \"openTime\": \"10:00\", \"options\": {\"cashless\": false, \"elevator\": false, \"groupOrder\": false, \"nameSticker\": false, \"parking\": true, \"photoSticker\": false, \"pickup\": false, \"ramp\": false, \"simCard\": false, \"taxFree\": false}, \"phone\": \"02-445-4102\"}", "title": "\uac15\ub0a8\uc138\uace1\uc810"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90", "matched_entities": {"Capability": ["address", "opentime", "closetime"], "MCPDomain": ["address"], "RiskScope": ["address", "lat", "lng"]}, "published": "2026-05-12T20:28:17.013729", "published_at": "2026-05-12T20:28:17.013729", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"address\": \"\uc11c\uc6b8\ud2b9\ubcc4\uc2dc \uac15\ub0a8\uad6c \ud559\ub3d9\ub85c \uc9c0\ud558 346 (\uc0bc\uc131\ub3d9)B1\uce35\", \"closeTime\": \"22:00\", \"lat\": 37.5171892352971, \"lng\": 127.04130142966, \"name\": \"\uac15\ub0a8\uad6c\uccad\uc5ed\uc810\", \"openTime\": \"10:00\", \"options\": {\"cashless\": false, \"elevator\": false, \"groupOrder\": false, \"nameSticker\": false, \"parking\": false, \"photoSticker\": false, \"pickup\": true, \"ramp\": false, \"simCard\": true, \"taxFree\": false}, \"phone\": \"1522-4400\"}", "title": "\uac15\ub0a8\uad6c\uccad\uc5ed\uc810"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#1037467", "matched_entities": {"Capability": ["pickupavailable"], "MCPDomain": ["price", "pickupavailable", "daisomall"], "Provider": ["daisomall", "daisomall.co.kr"]}, "published": "2026-05-12T20:28:17.013658", "published_at": "2026-05-12T20:28:17.013658", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"id\": \"1037467\", \"imageUrl\": \"https://cdn.daisomall.co.kr/file/PD/20250711/7skym8uzajyOapFf9kPC1037467_00_007skym8uzajyOapFf9kPC.jpg\", \"isNew\": false, \"name\": \"\uc0cc\ub514\uc2a4\ud06c USB\uba54\ubaa8\ub9ac 32GB\", \"pickupAvailable\": true, \"price\": 5000, \"soldOut\": false}", "title": "\uc0cc\ub514\uc2a4\ud06c USB\uba54\ubaa8\ub9ac 32GB"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#1060096", "matched_entities": {"Capability": ["pickupavailable"], "MCPDomain": ["price", "pickupavailable", "daisomall"], "Provider": ["daisomall", "daisomall.co.kr"]}, "published": "2026-05-12T20:28:17.013644", "published_at": "2026-05-12T20:28:17.013644", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"id\": \"1060096\", \"imageUrl\": \"https://cdn.daisomall.co.kr/file/PD/20250102/TK31c0rG5EifZPlRH45W1060096_00_00TK31c0rG5EifZPlRH45W.jpg\", \"isNew\": false, \"name\": \"3 in 1 \ucda9\uc804\ucf00\uc774\ube14 (USB A TO 5,8,C) -H(\ud654\uc774\ud2b8) \", \"pickupAvailable\": true, \"price\": 3000, \"soldOut\": false}", "title": "3 in 1 \ucda9\uc804\ucf00\uc774\ube14 (USB A TO 5,8,C) -H(\ud654\uc774\ud2b8)"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#1036313", "matched_entities": {"Capability": ["pickupavailable"], "MCPDomain": ["price", "pickupavailable", "daisomall"], "Provider": ["daisomall", "daisomall.co.kr"]}, "published": "2026-05-12T20:28:17.013626", "published_at": "2026-05-12T20:28:17.013626", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"id\": \"1036313\", \"imageUrl\": \"https://cdn.daisomall.co.kr/file/PD/20240419/3afVxroaWHi4pov0iFKa1036313_00_003afVxroaWHi4pov0iFKa.jpg\", \"isNew\": false, \"name\": \"UV/LED\uc824\ub7a8\ud504(6\uad6c/USB\ud615)\", \"pickupAvailable\": true, \"price\": 3000, \"soldOut\": false}", "title": "UV/LED\uc824\ub7a8\ud504(6\uad6c/USB\ud615)"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#1051354", "matched_entities": {"Capability": ["pickupavailable"], "MCPDomain": ["price", "pickupavailable", "daisomall"], "Provider": ["daisomall", "daisomall.co.kr"]}, "published": "2026-05-12T20:28:17.013605", "published_at": "2026-05-12T20:28:17.013605", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"id\": \"1051354\", \"imageUrl\": \"https://cdn.daisomall.co.kr/file/PD/20240529/T4liLStKBIvMYhh4LKYS1051354_00_07T4liLStKBIvMYhh4LKYS.jpg\", \"isNew\": false, \"name\": \"\uc561\uc13c_USB\uba54\ubaa8\ub9ac 32GB\", \"pickupAvailable\": false, \"price\": 5000, \"soldOut\": false}", "title": "\uc561\uc13c_USB\uba54\ubaa8\ub9ac 32GB"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp#1062147", "matched_entities": {"Capability": ["pickupavailable"], "MCPDomain": ["price", "pickupavailable", "daisomall"], "Provider": ["daisomall", "daisomall.co.kr"]}, "published": "2026-05-12T20:28:17.013549", "published_at": "2026-05-12T20:28:17.013549", "source": "hmmhmmhm/daiso-mcp", "summary": "{\"id\": \"1062147\", \"imageUrl\": \"https://cdn.daisomall.co.kr/file/PD/20251223/GWapdfxaqEnPxIJMRf2R1062147_00_00GWapdfxaqEnPxIJMRf2R.jpg\", \"isNew\": false, \"name\": \"USB\ud0c0\uc785 \ubaa8\uae30\uc720\uc778\ud1f4\uce58\uae30\", \"pickupAvailable\": false, \"price\": 5000, \"soldOut\": false}", "title": "USB\ud0c0\uc785 \ubaa8\uae30\uc720\uc778\ud1f4\uce58\uae30"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/edward-kim-dev/kr-pc-deals-mcp", "matched_entities": {"Capability": ["\uac80\uc0c9"], "MCPDomain": ["\uac00\uaca9"], "ProjectHealth": ["mcp", "\uc11c\ubc84"]}, "published": "2026-05-12T20:28:12.402429", "published_at": "2026-05-12T20:28:12.402429", "source": "awesome-mcp-korea Commerce \u0026 Retail", "summary": "\ub2e4\ub098\uc640\u00b7\ucef4\ud4e8\uc874 PC \ubd80\ud488 \ucd5c\uc800\uac00 \uac80\uc0c9, \uac00\uaca9 \ube44\uad50, \uac00\uaca9 \uc774\ub825, \ube4c\ub4dc \uacac\uc801, CPU-\uba54\uc778\ubcf4\ub4dc-RAM \ud638\ud658\uc131 \uccb4\ud06c\ub97c \uc81c\uacf5\ud558\ub294 MCP \uc11c\ubc84\uc785\ub2c8\ub2e4.", "title": "edward-kim-dev/kr-pc-deals-mcp"}, {"collected_at": "2026-05-12T20:28:17.047740", "link": "https://github.com/hmmhmmhm/daiso-mcp", "matched_entities": {"Capability": ["\uac80\uc0c9", "\uc870\ud68c"], "MCPDomain": ["daiso", "\uc7ac\uace0", "\uac00\uaca9", "\uc0c1\ud488", "\ub9e4\uc7a5", "\ub2e4\uc774\uc18c"], "ProjectHealth": ["mcp", "\uc11c\ubc84"], "Provider": ["daiso", "\ub2e4\uc774\uc18c"]}, "published": "2026-05-12T20:28:12.402414", "published_at": "2026-05-12T20:28:12.402414", "source": "awesome-mcp-korea Commerce \u0026 Retail", "summary": "\uc8fc\ubcc0 \ub2e4\uc774\uc18c \ub9e4\uc7a5\uc744 \uac80\uc0c9\ud558\uace0, \uc6d0\ud558\ub294 \uc0c1\ud488\uc758 \uc7ac\uace0 \uc5ec\ubd80 \ubc0f \uac00\uaca9\uc744 \uc870\ud68c\ud558\ub294 MCP \uc11c\ubc84. ChatGPT, Claude, Grok \ub4f1 AI \uc571\uacfc \uc5f0\ub3d9 \uac00\ub2a5.", "title": "daiso-mcp"}]</script>
+  <script id="entities-data" type="application/json">{"Capability": 23, "MCPDomain": 27, "ProjectHealth": 4, "Provider": 12, "RiskScope": 15}</script>
 
   <!-- Chart.js: local first, CDN fallback -->
   <script src="static/chart.min.js"></script>

@@ -1,0 +1,68 @@
+{
+  "date": "2026-05-07",
+  "category": "commerce_mcp",
+  "article_count": 11,
+  "source_count": 2,
+  "matched_count": 11,
+  "top_entities": [
+    {
+      "name": "MCPDomain",
+      "count": 26
+    },
+    {
+      "name": "Capability",
+      "count": 22
+    },
+    {
+      "name": "RiskScope",
+      "count": 15
+    },
+    {
+      "name": "Provider",
+      "count": 12
+    },
+    {
+      "name": "ProjectHealth",
+      "count": 2
+    }
+  ],
+  "sources": {
+    "hmmhmmhm/daiso-mcp": 10,
+    "awesome-mcp-korea Commerce & Retail": 1
+  },
+  "generated_at": "2026-05-07T09:31:04.942203+00:00",
+  "ontology": {
+    "repo": "CommerceMCPRadar",
+    "category": "commerce_mcp",
+    "ontology_version": "0.1.0",
+    "event_model_ids": [
+      "mcp.directory_entry",
+      "mcp.tool_result",
+      "shared.linked_repository_metadata",
+      "shared.risk_scope_signal"
+    ],
+    "event_model_mappings": {
+      "mcp_directory_entry": "mcp.directory_entry",
+      "mcp_tool_result": "mcp.tool_result",
+      "linked_repository_metadata": "shared.linked_repository_metadata",
+      "risk_scope_signal": "shared.risk_scope_signal"
+    },
+    "entity_type_hints": [
+      "mcp.server",
+      "mcp.tool"
+    ],
+    "source_role_ids": [
+      "candidate_backlog",
+      "community_signal"
+    ],
+    "source_role_mappings": {
+      "awesome-mcp-korea Commerce & Retail": "community_signal",
+      "hmmhmmhm/daiso-mcp": "candidate_backlog",
+      "edward-kim-dev/kr-pc-deals-mcp": "candidate_backlog"
+    },
+    "evidence_policy_ids": [
+      "traceable_url_required",
+      "write_action_risk_review_required"
+    ]
+  }
+}
