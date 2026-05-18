@@ -1,6 +1,6 @@
 {
   "category": "commerce_mcp",
-  "generated_at": "2026-05-17T13:04:11.330319+00:00",
+  "generated_at": "2026-05-18T14:58:31.919715+00:00",
   "scope_note": "commerce_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
@@ -104,7 +104,7 @@
       "status": "fresh",
       "article_count": 2,
       "event_count": 2,
-      "latest_event_at": "2026-05-17T13:04:04.386620+00:00",
+      "latest_event_at": "2026-05-18T14:58:29.199110+00:00",
       "age_days": 0.0,
       "latest_title": "edward-kim-dev/kr-pc-deals-mcp",
       "latest_url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
@@ -152,7 +152,7 @@
         "status": "stale",
         "repository": "hmmhmmhm/daiso-mcp",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 10.32,
+        "age_days": 11.4,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2026-05-06T18:49:16Z",
@@ -183,7 +183,7 @@
       "status": "fresh",
       "article_count": 10,
       "event_count": 10,
-      "latest_event_at": "2026-05-17T13:04:10.659254+00:00",
+      "latest_event_at": "2026-05-18T14:58:31.224204+00:00",
       "age_days": 0.0,
       "latest_title": "용인강남대점",
       "latest_url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
@@ -262,7 +262,7 @@
         "status": "stale",
         "repository": "edward-kim-dev/kr-pc-deals-mcp",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 10.32,
+        "age_days": 11.4,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2026-03-31T01:14:59Z",
@@ -309,7 +309,7 @@
       "event_model": "mcp_tool_result",
       "title": "용인강남대점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659254+00:00",
+      "event_at": "2026-05-18T14:58:31.224204+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -336,7 +336,7 @@
       "event_model": "risk_scope_signal",
       "title": "용인강남대점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659254+00:00",
+      "event_at": "2026-05-18T14:58:31.224204+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -363,7 +363,7 @@
       "event_model": "mcp_tool_result",
       "title": "강남역점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659236+00:00",
+      "event_at": "2026-05-18T14:58:31.224158+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -390,7 +390,7 @@
       "event_model": "risk_scope_signal",
       "title": "강남역점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659236+00:00",
+      "event_at": "2026-05-18T14:58:31.224158+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -417,7 +417,7 @@
       "event_model": "mcp_tool_result",
       "title": "강남역2호점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659212+00:00",
+      "event_at": "2026-05-18T14:58:31.224135+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -444,7 +444,7 @@
       "event_model": "risk_scope_signal",
       "title": "강남역2호점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%97%AD2%ED%98%B8%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659212+00:00",
+      "event_at": "2026-05-18T14:58:31.224135+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -471,7 +471,7 @@
       "event_model": "mcp_tool_result",
       "title": "강남세곡점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659186+00:00",
+      "event_at": "2026-05-18T14:58:31.224109+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -498,7 +498,7 @@
       "event_model": "risk_scope_signal",
       "title": "강남세곡점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EC%84%B8%EA%B3%A1%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659186+00:00",
+      "event_at": "2026-05-18T14:58:31.224109+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -525,7 +525,7 @@
       "event_model": "mcp_tool_result",
       "title": "강남구청역점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659133+00:00",
+      "event_at": "2026-05-18T14:58:31.224053+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -552,7 +552,7 @@
       "event_model": "risk_scope_signal",
       "title": "강남구청역점",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#%EA%B0%95%EB%82%A8%EA%B5%AC%EC%B2%AD%EC%97%AD%EC%A0%90",
-      "event_at": "2026-05-17T13:04:10.659133+00:00",
+      "event_at": "2026-05-18T14:58:31.224053+00:00",
       "mcp_domain": [
         "address"
       ],
@@ -579,7 +579,7 @@
       "event_model": "mcp_tool_result",
       "title": "샌디스크 USB메모리 32GB",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#1037467",
-      "event_at": "2026-05-17T13:04:10.659080+00:00",
+      "event_at": "2026-05-18T14:58:31.224003+00:00",
       "mcp_domain": [
         "price",
         "pickupavailable",
@@ -605,7 +605,7 @@
       "event_model": "mcp_tool_result",
       "title": "3 in 1 충전케이블 (USB A TO 5,8,C) -H(화이트)",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#1060096",
-      "event_at": "2026-05-17T13:04:10.659066+00:00",
+      "event_at": "2026-05-18T14:58:31.223988+00:00",
       "mcp_domain": [
         "price",
         "pickupavailable",
@@ -631,7 +631,7 @@
       "event_model": "mcp_tool_result",
       "title": "UV/LED젤램프(6구/USB형)",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#1036313",
-      "event_at": "2026-05-17T13:04:10.659044+00:00",
+      "event_at": "2026-05-18T14:58:31.223969+00:00",
       "mcp_domain": [
         "price",
         "pickupavailable",
@@ -657,7 +657,7 @@
       "event_model": "mcp_tool_result",
       "title": "액센_USB메모리 32GB",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#1051354",
-      "event_at": "2026-05-17T13:04:10.658978+00:00",
+      "event_at": "2026-05-18T14:58:31.223947+00:00",
       "mcp_domain": [
         "price",
         "pickupavailable",
@@ -683,7 +683,7 @@
       "event_model": "mcp_tool_result",
       "title": "USB타입 모기유인퇴치기",
       "url": "https://github.com/hmmhmmhm/daiso-mcp#1062147",
-      "event_at": "2026-05-17T13:04:10.658921+00:00",
+      "event_at": "2026-05-18T14:58:31.223887+00:00",
       "mcp_domain": [
         "price",
         "pickupavailable",
@@ -709,7 +709,7 @@
       "event_model": "mcp_directory_entry",
       "title": "edward-kim-dev/kr-pc-deals-mcp",
       "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
-      "event_at": "2026-05-17T13:04:04.386620+00:00",
+      "event_at": "2026-05-18T14:58:29.199110+00:00",
       "mcp_domain": [
         "가격"
       ],
@@ -733,7 +733,7 @@
       "event_model": "mcp_directory_entry",
       "title": "daiso-mcp",
       "url": "https://github.com/hmmhmmhm/daiso-mcp",
-      "event_at": "2026-05-17T13:04:04.386607+00:00",
+      "event_at": "2026-05-18T14:58:29.199092+00:00",
       "mcp_domain": [
         "daiso",
         "재고",
@@ -839,7 +839,7 @@
       "source": "hmmhmmhm/daiso-mcp",
       "repository": "hmmhmmhm/daiso-mcp",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 10.32,
+      "age_days": 11.4,
       "freshness_sla_days": 7.0
     },
     {
@@ -865,7 +865,7 @@
       "source": "edward-kim-dev/kr-pc-deals-mcp",
       "repository": "edward-kim-dev/kr-pc-deals-mcp",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 10.32,
+      "age_days": 11.4,
       "freshness_sla_days": 7.0
     }
   ],
