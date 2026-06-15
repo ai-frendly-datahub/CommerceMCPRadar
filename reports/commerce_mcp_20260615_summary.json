@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-15",
+  "category": "commerce_mcp",
+  "article_count": 13,
+  "source_count": 2,
+  "matched_count": 13,
+  "top_entities": [
+    {
+      "name": "MCPDomain",
+      "count": 30
+    },
+    {
+      "name": "Capability",
+      "count": 24
+    },
+    {
+      "name": "RiskScope",
+      "count": 15
+    },
+    {
+      "name": "Provider",
+      "count": 14
+    },
+    {
+      "name": "ProjectHealth",
+      "count": 4
+    }
+  ],
+  "sources": {
+    "hmmhmmhm/daiso-mcp": 11,
+    "awesome-mcp-korea Commerce & Retail": 2
+  },
+  "generated_at": "2026-06-15T17:04:12.299056+00:00"
+}
