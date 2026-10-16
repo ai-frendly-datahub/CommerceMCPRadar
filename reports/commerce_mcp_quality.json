@@ -1,6 +1,6 @@
 {
   "category": "commerce_mcp",
-  "generated_at": "2026-10-15T16:04:14.510198+00:00",
+  "generated_at": "2026-10-16T15:52:42.576088+00:00",
   "scope_note": "commerce_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
@@ -104,7 +104,7 @@
       "status": "fresh",
       "article_count": 2,
       "event_count": 2,
-      "latest_event_at": "2026-10-15T16:04:08.635584+00:00",
+      "latest_event_at": "2026-10-16T15:52:30.100515+00:00",
       "age_days": 0.0,
       "latest_title": "edward-kim-dev/kr-pc-deals-mcp",
       "latest_url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
@@ -152,7 +152,7 @@
         "status": "stale",
         "repository": "hmmhmmhm/daiso-mcp",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 161.45,
+        "age_days": 162.44,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2026-05-06T18:49:16Z",
@@ -184,7 +184,7 @@
       "article_count": 10,
       "event_count": 10,
       "latest_event_at": "2026-10-15T16:04:13.246138+00:00",
-      "age_days": 0.0,
+      "age_days": 0.99,
       "latest_title": "용인강남대점",
       "latest_url": "https://github.com/hmmhmmhm/daiso-mcp#%EC%9A%A9%EC%9D%B8%EA%B0%95%EB%82%A8%EB%8C%80%EC%A0%90",
       "latest_mcp_domain": [
@@ -262,7 +262,7 @@
         "status": "stale",
         "repository": "edward-kim-dev/kr-pc-deals-mcp",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 161.45,
+        "age_days": 162.44,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2026-03-31T01:14:59Z",
@@ -304,6 +304,63 @@
     }
   ],
   "events": [
+    {
+      "source": "awesome-mcp-korea Commerce & Retail",
+      "event_model": "mcp_directory_entry",
+      "title": "edward-kim-dev/kr-pc-deals-mcp",
+      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
+      "event_at": "2026-10-16T15:52:30.100515+00:00",
+      "mcp_domain": [
+        "가격"
+      ],
+      "provider": [],
+      "capability": [
+        "검색"
+      ],
+      "risk_scope": [],
+      "project_health": [
+        "mcp",
+        "서버"
+      ],
+      "required_field_proxy": {
+        "repository": true,
+        "source_section": true,
+        "source_url": true
+      }
+    },
+    {
+      "source": "awesome-mcp-korea Commerce & Retail",
+      "event_model": "mcp_directory_entry",
+      "title": "daiso-mcp",
+      "url": "https://github.com/hmmhmmhm/daiso-mcp",
+      "event_at": "2026-10-16T15:52:30.100500+00:00",
+      "mcp_domain": [
+        "daiso",
+        "재고",
+        "가격",
+        "상품",
+        "매장",
+        "다이소"
+      ],
+      "provider": [
+        "daiso",
+        "다이소"
+      ],
+      "capability": [
+        "검색",
+        "조회"
+      ],
+      "risk_scope": [],
+      "project_health": [
+        "mcp",
+        "서버"
+      ],
+      "required_field_proxy": {
+        "repository": true,
+        "source_section": true,
+        "source_url": true
+      }
+    },
     {
       "source": "hmmhmmhm/daiso-mcp",
       "event_model": "mcp_tool_result",
@@ -705,63 +762,6 @@
       }
     },
     {
-      "source": "awesome-mcp-korea Commerce & Retail",
-      "event_model": "mcp_directory_entry",
-      "title": "edward-kim-dev/kr-pc-deals-mcp",
-      "url": "https://github.com/edward-kim-dev/kr-pc-deals-mcp",
-      "event_at": "2026-10-15T16:04:08.635584+00:00",
-      "mcp_domain": [
-        "가격"
-      ],
-      "provider": [],
-      "capability": [
-        "검색"
-      ],
-      "risk_scope": [],
-      "project_health": [
-        "mcp",
-        "서버"
-      ],
-      "required_field_proxy": {
-        "repository": true,
-        "source_section": true,
-        "source_url": true
-      }
-    },
-    {
-      "source": "awesome-mcp-korea Commerce & Retail",
-      "event_model": "mcp_directory_entry",
-      "title": "daiso-mcp",
-      "url": "https://github.com/hmmhmmhm/daiso-mcp",
-      "event_at": "2026-10-15T16:04:08.635568+00:00",
-      "mcp_domain": [
-        "daiso",
-        "재고",
-        "가격",
-        "상품",
-        "매장",
-        "다이소"
-      ],
-      "provider": [
-        "daiso",
-        "다이소"
-      ],
-      "capability": [
-        "검색",
-        "조회"
-      ],
-      "risk_scope": [],
-      "project_health": [
-        "mcp",
-        "서버"
-      ],
-      "required_field_proxy": {
-        "repository": true,
-        "source_section": true,
-        "source_url": true
-      }
-    },
-    {
       "source": "hmmhmmhm/daiso-mcp",
       "event_model": "linked_repository_metadata",
       "title": "hmmhmmhm/daiso-mcp repository metadata",
@@ -839,7 +839,7 @@
       "source": "hmmhmmhm/daiso-mcp",
       "repository": "hmmhmmhm/daiso-mcp",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 161.45,
+      "age_days": 162.44,
       "freshness_sla_days": 7.0
     },
     {
@@ -865,7 +865,7 @@
       "source": "edward-kim-dev/kr-pc-deals-mcp",
       "repository": "edward-kim-dev/kr-pc-deals-mcp",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 161.45,
+      "age_days": 162.44,
       "freshness_sla_days": 7.0
     }
   ],
